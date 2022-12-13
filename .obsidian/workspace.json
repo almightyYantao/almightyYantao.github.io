@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "9743b10b3ed96227",
+        "id": "dfd121615eb07205",
         "type": "tabs",
         "children": [
           {
-            "id": "59ea8a41a52898a8",
+            "id": "f6a600c820bbf8e8",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -136,8 +136,12 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "59ea8a41a52898a8",
+  "active": "f6a600c820bbf8e8",
   "lastOpenFiles": [
+    "themes/obsidian/README_CN.md",
+    "themes/obsidian/README.md",
+    "themes/obsidian/CHANGELOG.md",
+    "themes/obsidian/CHANGELOG_CN.md",
     "source/_posts/haproxy-load.md",
     "Untitled.md"
   ]
