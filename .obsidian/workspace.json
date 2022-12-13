@@ -144,17 +144,17 @@
     "direction": "horizontal",
     "width": 280.5
   },
-  "active": "7c093c06b3989b7c",
+  "active": "cb05a86b8ef82de9",
   "lastOpenFiles": [
+    "source/_posts/openvpn/openvpn-auth/image2022-12-12_20-11-38.png",
+    "source/_posts/openvpn/openvpn-auth.md",
     "public/img/image2022-12-12_20-11-38.png",
     "Pasted image 20221213175840.png",
-    "source/_posts/openvpn/openvpn-auth.md",
     "source/_posts/openvpn/openvpn-access-server.md",
     "source/_obsidian/Post Template.md",
     "2022-12-13.md",
     "Untitled.md",
     "source/_obsidian.md",
-    "source/_posts/zabbix/zabbix-wecom.md",
-    "source/_posts/haproxy-load.md"
+    "source/_posts/zabbix/zabbix-wecom.md"
   ]
 }
