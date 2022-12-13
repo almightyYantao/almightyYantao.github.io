@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>安装&amp;破解Openvpn Access Server - YanTao的线上笔记本</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="yantao 技术博客 笔记本,"> 
+    <meta name="description" content="在线安装（需要翻墙）yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm
+yum -y install openv,"> 
+    <meta name="author" content="Yan Tao"> 
+    <link rel="alternative" href="atom.xml" title="YanTao的线上笔记本" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+    
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+    
+    <script>var musiclist = ""</script>
+    
+<script src="/js/loadaplayer.js"></script>
+
+    <!-- 引用依赖 -->
+    
+<link rel="stylesheet" href="/aplayer/dist/APlayer.min.css">
+
+    
+<script src="/aplayer/dist/APlayer.min.js"></script>
+<script src="/js/Meting.min.js"></script>
+
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">YanTao的线上笔记本</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">安装&破解Openvpn Access Server</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url('/img/cover.jpg') ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
+                
+                December 13, 2022
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2022/12/13/openvpn-access-server/" title="安装&amp;破解Openvpn Access Server" class="">安装&amp;破解Openvpn Access Server</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    3.7k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    3 mins.
+                </span>
+                
+                
+                <span id="/2022/12/13/openvpn-access-server/" class="leancloud_visitors" data-flag-title="安装&破解Openvpn Access Server">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/2-9-0/" rel="tag">2.9.0</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn/" rel="tag">openvpn</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn-access-server/" rel="tag">openvpn access server</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%A0%B4%E8%A7%A3/" rel="tag">破解</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h2 id="在线安装（需要翻墙）"><a href="#在线安装（需要翻墙）" class="headerlink" title="在线安装（需要翻墙）"></a>在线安装（需要翻墙）</h2><pre><code class="shell">yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm
+yum -y install openvpn-as
+</code></pre>
+<h2 id="管理员登录"><a href="#管理员登录" class="headerlink" title="管理员登录"></a>管理员登录</h2><p>首先需要修改管理员密码</p>
+<pre><code class="shell">passwd openvpn
+</code></pre>
+<p>输入之后可以登录管理员页面了。</p>
+<p>如果密码一直错误的话，说明修改失败了，可以查看下原来的密码是什么</p>
+<pre><code class="shell">cat /usr/local/openvpn_as/init.log
+</code></pre>
+<p>登录后点击User Management–&gt;User Permissions 添加用户</p>
+<h2 id="破解用户数"><a href="#破解用户数" class="headerlink" title="破解用户数"></a>破解用户数</h2><ul>
+<li>主要操作的文件是一个名叫 <code>pyovpn-2.0-pyx.x.egg</code> 的文件，以我了解的情况来看，从 <code>2.5.0</code> 到 <code>2.9.x</code> 文件名一直都是这个，只是不同版本里面的内容不一样.</li>
+<li>这个文件有点类似 <code>Java</code> 当中的 <code>jar</code> 库文件，也是一个 <code>zip</code> 压缩文件，里面包含了一些 <code>Python</code> 的字节码文件.</li>
+<li>破解的原理大概是在 <code>Python</code> 中采用类似 <code>Java</code> 动态代理的技术，将原本读取用户属性的调用返回值拦截，修改用户限制数量再返回.</li>
+</ul>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><code>2.9.0</code> 以下版本破解的目标文件是 <code>/pyovpn/lic/uprop.pyo</code>, <code>2.9.0</code> 及以上是 <code>/pyovpn/lic/uprop.pyc</code>; 按照网上流行的破解方法，把这个文件解压出来并改名为 <code>uprop2.pyo</code> 或 <code>uprop2.pyc</code>, 然后新建一个 <code>uprop.py</code> 文件，内容如下:</p>
+<p><code>**2.9.0**</code><strong>以下版本内容:</strong></p>
+<pre><code class="shell">import uprop2
+old_figure = None
+
+def new_figure(self, licdict):
+    ret = old_figure(self, licdict)
+    ret[&#39;concurrent_connections&#39;] = 1024
+    return ret
+
+
+for x in dir(uprop2):
+    if x[:2] == &#39;__&#39;:
+        continue
+    if x == &#39;UsageProperties&#39;:
+        exec(&#39;old_figure = uprop2.UsageProperties.figure&#39;)
+        exec(&#39;uprop2.UsageProperties.figure = new_figure&#39;)
+    exec(&#39;%s = uprop2.%s&#39; % (x, x))
+</code></pre>
+<p><code>**2.9.0**</code><strong>及以上版本内容:</strong></p>
+<pre><code class="shell">from pyovpn.lic import uprop2
+old_figure = None
+
+def new_figure(self, licdict):
+    ret = old_figure(self, licdict)
+    ret[&#39;concurrent_connections&#39;] = 1024
+    return ret
+
+
+for x in dir(uprop2):
+    if x[:2] == &#39;__&#39;:
+        continue
+    if x == &#39;UsageProperties&#39;:
+        exec(&#39;old_figure = uprop2.UsageProperties.figure&#39;)
+        exec(&#39;uprop2.UsageProperties.figure = new_figure&#39;)
+    exec(&#39;%s = uprop2.%s&#39; % (x, x))
+</code></pre>
+<p>再将上面的 <code>uprop.py</code> 编译为库文件 <code>uprop.pyo</code> 或 <code>uprop.pyc</code>:</p>
+<pre><code class="shell"># &lt;2.9.0
+python2 -O -m compileall uprop.py
+# &gt;=2.9.0
+python3 -O -m compileall uprop.py &amp;&amp; mv __pycache__/uprop.cpython-37.opt-1.pyc uprop.pyc
+</code></pre>
+<blockquote>
+<p>注意 <code>uprop.cpython-37.opt-1.pyc</code> 文件名会随着 <code>python</code> 版本变化而变化.</p>
+</blockquote>
+<p>现在我们得到了一个改文件名的文件 <code>uprop2.pyo</code> 或 <code>uprop2.pyc</code>, 和一个编译出来的 <code>uprop.pyo</code> 或 <code>uprop.pyc</code>; 把这两个文件压缩到 <code>pyovpn-2.0-pyx.x.egg</code> 的 <code>/pyovpn/lic/</code> 目录下，然后去服务器替换目标文件，重启服务就 OK 了.</p>
+<h2 id="所有的操作命令"><a href="#所有的操作命令" class="headerlink" title="所有的操作命令"></a>所有的操作命令</h2><pre><code class="shell"># 把操作的文件复制出来到另外的一个文件夹下面操作
+cd /usr/local/openvpn_as/lib/python &amp; mkdir pojie &amp; cp python/pyovpn-2.0-py3.6.egg ./pojie &amp; cd pojie/
+# 改一个文件名，防止后面打包的时候把源文件覆盖了
+mv pyovpn-2.0-py3.6.egg pyovpn-2.0-py3.6.egg.bak &amp; unzip pyovpn-2.0-py3.6.egg.bak
+# 进入到需要修改的目录
+cd pyovpn/lic
+# 复制源文件改名
+mv uprop.pyc uprop2.pyc
+# 新增一个py文件，然后把文件内容复制进去，并保存
+vi uprop.py
+# 退到 pojie 文件夹，进行打包
+zip -r pyovpn-2.0-py3.6.egg EGG-INFO/ common/ pyovpn/
+# 复制文件到运行目录，覆盖
+cp pyovpn-2.0-py3.6.egg /usr/local/openvpn_as/lib/python
+# 重启服务
+systemctl restart openvpnas
+</code></pre>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+                        
+            
+            
+            <div id="vcomments"></div>
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://s2.ax1x.com/2019/09/19/nLtSiD.png" height=300 width=300></img>
+                    <p>Yan Tao</p>
+                    <span>一个混迹在IT行业的菜鸟</span>
+                    <dl>
+                        
+                            
+                            
+                            
+                        
+                        
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">3 <p>Articles</p></a></li>
+                    <li><a href="/categories">0 <p>Categories</p></a></li>
+                    <li><a href="/tags">7 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85%EF%BC%88%E9%9C%80%E8%A6%81%E7%BF%BB%E5%A2%99%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">在线安装（需要翻墙）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%91%98%E7%99%BB%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">管理员登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%B4%E8%A7%A3%E7%94%A8%E6%88%B7%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">破解用户数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E6%9C%89%E7%9A%84%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">所有的操作命令</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2022
+        <span class="gradient-text">
+            Yan Tao
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.9.3" target="_blank" rel="noopener">v1.4.9.3</a></small>
+        
+        
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+ 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+ 
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+ 
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+ 
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+ 
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+   
+<script src="/js/busuanzi.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    if ($('span[id^="busuanzi_"]').length) {
+      initialBusuanzi();
+    }
+  });
+</script>
+ 
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+<script>
+  function initialTyped() {
+    var typedTextEl = $('.typed-text');
+    if (typedTextEl && typedTextEl.length > 0) {
+      var typed = new Typed('.typed-text', {
+        strings: ['一个混迹在IT行业的菜鸟', '艺术家思维去思考问题，工匠创造精神去开发'],
+        typeSpeed: 90,
+        loop: true,
+        loopCount: Infinity,
+        backSpeed: 20,
+      });
+    }
+  }
+
+  if ($('.article-header') && $('.article-header').length) {
+    $(document).ready(function () {
+      initialTyped();
+    });
+  }
+</script>
+
+ 
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var valine = new Valine();
+
+  function initValine(path) {
+    if (!path) path = window.location.pathname;
+    let language = 'en';
+    if (!language) {
+      language = 'en';
+    } else {
+      language = language.toLowerCase();
+    }
+    valine.init({
+      el: '#vcomments',
+      appId: 'rorG5VPu1CyNObcc8inI3QSg-gzGzoHsz',
+      appKey: '6M1zagmoBK4gBS8BCI9eWKId',
+      notify: 'false',
+      verify: 'false',
+      avatar: 'mp',
+      placeholder: 'Leave your throughs behind~',
+      visitor: 'true',
+      path: path,
+      lang: language,
+    });
+  }
+
+  $(document).ready(function () {
+    initValine();
+  });
+</script>
+
+
+
+<!-- 引用依赖 -->
+<script>document.write(aplayerconf)</script>
+
+
+
+
+</html>

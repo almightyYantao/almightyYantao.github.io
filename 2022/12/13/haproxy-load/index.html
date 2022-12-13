@@ -5,12 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>YanTao的线上笔记本 - 一个混迹在IT行业的菜鸟</title>
+    <title>通过 Haproxy 实现 Shadowshadows 负载均衡 - YanTao的线上笔记本</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="yantao 技术博客 笔记本,"> 
-    
+    <meta name="description" content="介绍缺点：所有的SS的加密方式和密码必须一致介绍：HAProxy是一个使用C语言编写的自由及开放原始码软件，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。
+安装Haproxyyu,"> 
     <meta name="author" content="Yan Tao"> 
     <link rel="alternative" href="atom.xml" title="YanTao的线上笔记本" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -67,109 +68,75 @@
     </div>
     <span id="config-title" style="display:none">YanTao的线上笔记本</span>
     <div id="loader"></div>
-    <div class="nav">
-    <ul id="menu-menu" class="menu">
-        
-        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/page/" title="PAGE" external="false">PAGE</a>
-        </li>
-        
-    </ul>
-    <p class="copyright" id="copyright">
-        &copy; 2022 Yan Tao.
-        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-        Theme <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
-    </p>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">通过 Haproxy 实现 Shadowshadows 负载均衡</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="container">
-    
-<div class="search-box">
-    <form class="site-search-form">
-        <span class="iconfont icon-search"></span>
-        <input type="text" id="local-search-input" class="st-search-input" />
-        <div class="iconfont icon-cross search-box-close"></div>
-    </form>
-    <div class="search-scrollable">
-        <div id="local-search-result" class="local-search-result-cls" data-initialise="Initialising search index..."
-            data-start="Please input search keywords." data-empty="No result found, please try other keywords.">
-            <span>Please input search keywords.</span>
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url('/img/cover.jpg') ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
+                
+                December 13, 2022
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2022/12/13/haproxy-load/" title="通过 Haproxy 实现 Shadowshadows 负载均衡" class="">通过 Haproxy 实现 Shadowshadows 负载均衡</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    3.1k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    3 mins.
+                </span>
+                
+                
+                <span id="/2022/12/13/haproxy-load/" class="leancloud_visitors" data-flag-title="通过 Haproxy 实现 Shadowshadows 负载均衡">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
         </div>
     </div>
-</div>
-<div id="header">
-    <div>
-        <div class="logo animated fadeInDown">
-            <img src="/img/favicon.png" alt="">
-            <a class="image-logo" href="/"></a>
-        </div>
-        <ul id="menu-menu" class="menu text-menu">
-            
-            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-                <a href="/page/" title="PAGE" external="false" class="menu-link">PAGE</a>
-            </li>
-            
-            
-        </ul>
-        <div class="iconfont icon-menu switchmenu gradient-text animated fadeInDown"></div>
-    </div>
-</div>
-<div id="screen">
-    <div id="mark">
-        <div class="cover animated fadeIn" style="
-            animation-delay: 900ms;
-            animation-duration: 2.8s;
-            background-image:
-                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.56), #100e17),
-                url(/img/cover.jpg);">
-        </div>
-    </div>
-    
-    <div id="post0" class="else">
-        <p class="animated fadeInDown">
-            
-            <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
-            
-            December 13, 2022
-        </p>
-        <h3 class="post-title animated fadeInDown">
-            <a href="/2022/12/13/zabbix/zabbix-wecom/" title="zabbix 警报推送至企业微信（图文版）" class="posttitle">zabbix 警报推送至企业微信（图文版）</a></h3>
-        
-        <p class="post-count animated fadeInDown">
-            
-            <span>
-                <b class="iconfont icon-text2"></b> <i>Words count</i>
-                5.3k
-            </span>
-            
-            
-            <span>
-                <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                5 mins.
-            </span>
-            
-            
-            <span id="/2022/12/13/zabbix/zabbix-wecom/" class="leancloud_visitors" data-flag-title="">
-                <b class="iconfont icon-read"></b> <i>Read count</i>
-                <span class="leancloud-visitors-count">1000000</span>
-            </span>
-            
-        </p>
-        
-        
-        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/zabbix/" rel="tag">zabbix</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/" rel="tag">企业微信</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%8A%A5%E8%AD%A6/" rel="tag">报警</a></li></ul>
-        
-        <div class="md-content animated fadeIn">
-            
-            <h2 id="新增Python脚本"><a href="#新增Python脚本" class="headerlink" title="新增Python脚本"></a>新增Python脚本</h2><pre><code class="python"># encoding: utf-8
-import sys
-import requests...</code></pre>
-            
-            <span class="read-more"><a href="/2022/12/13/zabbix/zabbix-wecom/" title="Read article" class="posttitle">Read article</a>
-                <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-    
 </div>
 
 <div class="screen-gradient-after">
@@ -177,116 +144,133 @@ import requests...</code></pre>
         <div class="screen-gradient-content-inside">
             <div class="bold-underline-links screen-gradient-sponsor">
                 <p>
-                    <span class="typed-text"></span>
+                    <span class="animated fadeIn delay-1s"></span>
                 </p>
             </div>
         </div>
     </div>
 </div>
 
-    <div id="primary">
-        
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>缺点：所有的SS的加密方式和密码必须一致<br>介绍：HAProxy是一个使用C语言编写的自由及开放原始码软件，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。</p>
+<h2 id="安装Haproxy"><a href="#安装Haproxy" class="headerlink" title="安装Haproxy"></a>安装Haproxy</h2><pre><code class="shell">yum install haproxy
+</code></pre>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><pre><code class="shell">global
+    chroot  /var/lib/haproxy
+    pidfile /var/run/haproxy.pid
+    user    haproxy
+    group   haproxy
+defaults
+    mode    tcp                         #服务器默认的工作模式
+    balance roundrobin                  #服务器默认使用的均衡模式
+    retries 3                           #三次连接失败表示服务器不可用
+    maxconn 5000                        #最大连接数
+    timeout connect 500ms               #连接超时
+    timeout client  3s                  #客户端超时
+    timeout server  3s                  #服务器超时
+
+
+listen WebPanel
+    mode    http                        #这里使用HTTP模式
+    bind    10.1.1.58:9595               #WEB服务端口
+    stats   refresh 5s                  #自动刷新时间
+    stats   uri  /                      #WEB管理地址
+    stats   auth admin:xxxx         #账号密码
+    stats   hide-version                #隐藏版本
+    stats   admin if TRUE               #验证通过则赋予管理权
+
+frontend shadowsocks-in
+    bind *:50001
+    default_backend servers
+
+backend servers
+    mode tcp
+    balance roundrobin
+    # option external-check
+    option tcp-check
+    # external-check command &quot;/etc/haproxy/haproxy-shadowsocks-checker.py&quot;
+
+    server ss1 43.156.100.84:2195 check inter 500 rise 2 fall 4 weight 100   #SS/SSR服务器地址与端口
+    server ss2 42.157.192.42:10108 check inter 500 rise 2 fall 4 weight 100
+</code></pre>
+<p><code>server</code>：后面首先跟名字，名字随便起呗，自己能够区分就行。紧接着跟SS的公网IP+端口，端口也就是SS&#x2F;SSR的端口。<br><code>check</code>：是检测的意思，这段配置很重要<br><code>inter</code>：单位毫秒，我配置的500，即500毫秒检测一次目标服务器。<br><code>rise2</code>：设定健康状态检查中，某离线的服务器从离线状态转换至正常状态需要成功检查的次数，这里我设置的2次。<br><code>fall4</code>：确认服务器从正常状态转换为不可用状态需要检查的次数，这里是4次。<br><code>weight</code>：权重，值越大代表这台机器工作的机会越多，这里我们可以把一台线路较好的机器的权重设置高一些。<br><code>balance</code>：负载均衡方式</p>
+<ul>
+<li>roundrobin：基于权重进行轮叫，在服务器的处理时间保持均匀分布时，这是最平衡、最公平的算法。此算法是动态的，这表示其权重可以在运行时进行调整，不过，在设计上，每个后端服务器仅能最多接受4128个连接；</li>
+<li>static-rr：基于权重进行轮叫，与roundrobin类似，但是为静态方法，在运行时调整其服务器权重不会生效；不过，其在后端服务器连接数上没有限制；</li>
+<li>leastconn：新的连接请求被派发至具有最少连接数目的后端服务器；在有着较长时间会话的场景中推荐使用此算法，如LDAP、SQL等，其并不太适用于较短会话的应用层协议，如HTTP；此算法是动态的，可以在运行时调整其权重；</li>
+<li>source：将请求的源地址进行hash运算，并由后端服务器的权重总数相除后派发至某匹配的服务器；这可以使得同一个客户端IP的请求始终被派发至某特定的服务器；不过，当服务器权重总数发生变化时，如某服务器宕机或添加了新的服务器，许多客户端的请求可能会被派发至与此前请求不同的服务器；常用于 负载均衡无cookie功能的基于TCP的协议；其默认为静态，不过也可以使用hash-type修改此特性；</li>
+</ul>
+<h2 id="修改Shadowsocks配置"><a href="#修改Shadowsocks配置" class="headerlink" title="修改Shadowsocks配置"></a>修改Shadowsocks配置</h2><pre><code class="shell">&#123;
+    &quot;server&quot;:&quot;127.0.0.1&quot;, # 这里改成Haproxy的地址
+    &quot;server_port&quot;:50001, # 这里改成Haproxy监听的端口
+    &quot;local_port&quot;:1080, # 这里本地监听端口
+    &quot;password&quot;:&quot;qunheadmin&quot;,
+    &quot;timeout&quot;:60,
+    &quot;method&quot;:&quot;aes-256-gcm&quot;,
+    &quot;mode&quot;:&quot;tcp_and_udp&quot;
+&#125;
+</code></pre>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
             
-                <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
             
-            December 13, 2022
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2022/12/13/openvpn-access-server/" title="安装&amp;破解Openvpn Access Server" class="posttitle">安装&amp;破解Openvpn Access Server</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        3.7k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        3 mins.
-                    </span>
-                
-                
-                    <span id="/2022/12/13/openvpn-access-server/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>Read count</i>
-                        <span class="leancloud-visitors-count">1000000</span>
-                    </span>
-                
-            </p>
+                        
             
-                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/2-9-0/" rel="tag">2.9.0</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn/" rel="tag">openvpn</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn-access-server/" rel="tag">openvpn access server</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%A0%B4%E8%A7%A3/" rel="tag">破解</a></li></ul>
             
-        
-        <div class="md-content animated fadeIn">
+            <div id="vcomments"></div>
             
-                <h2 id="在线安装（需要翻墙）"><a href="#在线安装（需要翻墙）" class="headerlink" title="在线安装（需要翻墙）"></a>在线安装（需要翻墙）</h2><pre><code class="shell">yum -y install https://as-repository.openvpn...</code></pre>
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://s2.ax1x.com/2019/09/19/nLtSiD.png" height=300 width=300></img>
+                    <p>Yan Tao</p>
+                    <span>一个混迹在IT行业的菜鸟</span>
+                    <dl>
+                        
+                            
+                            
+                            
+                        
+                        
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">3 <p>Articles</p></a></li>
+                    <li><a href="/categories">0 <p>Categories</p></a></li>
+                    <li><a href="/tags">7 <p>Tags</p></a></li>
+                </ul>
+            </div>
             
-            <span class="read-more"><a href="/2022/12/13/openvpn-access-server/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Haproxy"><span class="toc-number">2.</span> <span class="toc-text">安装Haproxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9Shadowsocks%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">修改Shadowsocks配置</span></a></li></ol>
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </div>
 
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
-            
-            December 13, 2022
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2022/12/13/haproxy-load/" title="通过 Haproxy 实现 Shadowshadows 负载均衡" class="posttitle">通过 Haproxy 实现 Shadowshadows 负载均衡</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        3.1k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        3 mins.
-                    </span>
-                
-                
-                    <span id="/2022/12/13/haproxy-load/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>Read count</i>
-                        <span class="leancloud-visitors-count">1000000</span>
-                    </span>
-                
-            </p>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>缺点：所有的SS的加密方式和密码必须一致<br>介绍：HAProxy是一个使用C语言编写的自由及开放原始...</p>
-            
-            <span class="read-more"><a href="/2022/12/13/haproxy-load/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
     </div>
 </div>
-
-
-    </div>
-    
-</div>
-<div id="preview"></div>
-
     <div id="back-to-top" class="animated fadeIn faster">
         <div class="flow"></div>
         <span class="percentage animated fadeIn faster">0%</span>
