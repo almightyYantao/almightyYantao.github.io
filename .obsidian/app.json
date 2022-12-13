@@ -1,5 +1,6 @@
 {
   "userIgnoreFilters": [
     "source/"
-  ]
+  ],
+  "alwaysUpdateLinks": true
 }
