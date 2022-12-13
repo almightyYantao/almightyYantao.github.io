@@ -11,8 +11,12 @@
             "id": "cb05a86b8ef82de9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "source/_posts/openvpn/openvpn-auth.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "source/_posts/openvpn/openvpn-auth.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "source/_posts/openvpn/openvpn-auth.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "source/_posts/openvpn/openvpn-auth.md"
+              }
             }
           },
           {
@@ -134,19 +142,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 352.5
+    "width": 280.5
   },
   "active": "cb05a86b8ef82de9",
   "lastOpenFiles": [
+    "source/_posts/openvpn/img/image2022-12-12_20-11-38.png",
+    "Pasted image 20221213175840.png",
+    "source/_posts/openvpn/openvpn-auth.md",
+    "source/_posts/openvpn/openvpn-access-server.md",
     "source/_obsidian/Post Template.md",
     "2022-12-13.md",
     "Untitled.md",
     "source/_obsidian.md",
-    "source/_posts/openvpn-access-server.md",
     "source/_posts/zabbix/zabbix-wecom.md",
-    "source/_posts/haproxy-load.md",
-    "themes/obsidian/README_CN.md",
-    "themes/obsidian/README.md",
-    "themes/obsidian/CHANGELOG.md"
+    "source/_posts/haproxy-load.md"
   ]
 }
