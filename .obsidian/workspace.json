@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "dfd121615eb07205",
+        "id": "a9e277c26da89ccc",
         "type": "tabs",
         "children": [
           {
-            "id": "f6a600c820bbf8e8",
+            "id": "cb05a86b8ef82de9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "source/_posts/haproxy-load.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,14 +81,13 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "source/_posts/haproxy-load.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               }
             }
           },
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "source/_posts/haproxy-load.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,25 +118,35 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "source/_posts/haproxy-load.md"
-              }
+              "state": {}
+            }
+          },
+          {
+            "id": "ac80815e9d313c9c",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 352.5
   },
-  "active": "f6a600c820bbf8e8",
+  "active": "cb05a86b8ef82de9",
   "lastOpenFiles": [
+    "source/_obsidian/Post Template.md",
+    "2022-12-13.md",
+    "Untitled.md",
+    "source/_obsidian.md",
+    "source/_posts/openvpn-access-server.md",
+    "source/_posts/zabbix/zabbix-wecom.md",
+    "source/_posts/haproxy-load.md",
     "themes/obsidian/README_CN.md",
     "themes/obsidian/README.md",
-    "themes/obsidian/CHANGELOG.md",
-    "themes/obsidian/CHANGELOG_CN.md",
-    "source/_posts/haproxy-load.md",
-    "Untitled.md"
+    "themes/obsidian/CHANGELOG.md"
   ]
 }
