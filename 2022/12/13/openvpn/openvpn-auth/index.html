@@ -5,13 +5,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>安装&amp;破解Openvpn Access Server - YanTao的线上笔记本</title>
+    <title>openvpn-auth（支持企业微信认证&amp;LDAP） - YanTao的线上笔记本</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="yantao 技术博客 笔记本,"> 
-    <meta name="description" content="在线安装（需要翻墙）yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm
-yum -y install openv,"> 
+    <meta name="description" content="方案介绍时序图
+其中有两个地方需要修改
+corpid: 企业微信的企业ID
+corpsecret: 拥有通讯录的企业微信的Secret
+
+代码如下package auth
+import (
+    ,"> 
     <meta name="author" content="Yan Tao"> 
     <link rel="alternative" href="atom.xml" title="YanTao的线上笔记本" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -73,9 +79,9 @@ yum -y install openv,">
 <div id="top" style="display: block;">
     <div class="bar" style="width: 0;"></div>
     <div class="navigation animated fadeIn fast delay-1s">
-        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://almightyyantao.github.io">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">安装&破解Openvpn Access Server</h3>
+        <h3 class="subtitle">openvpn-auth（支持企业微信认证&LDAP）</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -109,24 +115,24 @@ yum -y install openv,">
                 
                 December 13, 2022
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2022/12/13/openvpn-access-server/" title="安装&amp;破解Openvpn Access Server" class="">安装&amp;破解Openvpn Access Server</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2022/12/13/openvpn/openvpn-auth/" title="openvpn-auth（支持企业微信认证&amp;LDAP）" class="">openvpn-auth（支持企业微信认证&amp;LDAP）</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    3.7k
+                    4.7k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    3 mins.
+                    4 mins.
                 </span>
                 
                 
-                <span id="/2022/12/13/openvpn-access-server/" class="leancloud_visitors" data-flag-title="安装&破解Openvpn Access Server">
+                <span id="/2022/12/13/openvpn/openvpn-auth/" class="leancloud_visitors" data-flag-title="openvpn-auth（支持企业微信认证&LDAP）">
                     <b class="iconfont icon-read"></b> <i>Read count</i>
                     <span class="leancloud-visitors-count">1000000</span>
                 </span>
@@ -135,7 +141,7 @@ yum -y install openv,">
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/2-9-0/" rel="tag">2.9.0</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn/" rel="tag">openvpn</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn-access-server/" rel="tag">openvpn access server</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%A0%B4%E8%A7%A3/" rel="tag">破解</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/ldap/" rel="tag">ldap</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn/" rel="tag">openvpn</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn-auth/" rel="tag">openvpn-auth</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/wecom/" rel="tag">wecom</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/" rel="tag">企业微信</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E8%AE%A4%E8%AF%81/" rel="tag">认证</a></li></ul>
             
         </div>
     </div>
@@ -156,85 +162,139 @@ yum -y install openv,">
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h2 id="在线安装（需要翻墙）"><a href="#在线安装（需要翻墙）" class="headerlink" title="在线安装（需要翻墙）"></a>在线安装（需要翻墙）</h2><pre><code class="shell">yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm
-yum -y install openvpn-as
-</code></pre>
-<h2 id="管理员登录"><a href="#管理员登录" class="headerlink" title="管理员登录"></a>管理员登录</h2><p>首先需要修改管理员密码</p>
-<pre><code class="shell">passwd openvpn
-</code></pre>
-<p>输入之后可以登录管理员页面了。</p>
-<p>如果密码一直错误的话，说明修改失败了，可以查看下原来的密码是什么</p>
-<pre><code class="shell">cat /usr/local/openvpn_as/init.log
-</code></pre>
-<p>登录后点击User Management–&gt;User Permissions 添加用户</p>
-<h2 id="破解用户数"><a href="#破解用户数" class="headerlink" title="破解用户数"></a>破解用户数</h2><ul>
-<li>主要操作的文件是一个名叫 <code>pyovpn-2.0-pyx.x.egg</code> 的文件，以我了解的情况来看，从 <code>2.5.0</code> 到 <code>2.9.x</code> 文件名一直都是这个，只是不同版本里面的内容不一样.</li>
-<li>这个文件有点类似 <code>Java</code> 当中的 <code>jar</code> 库文件，也是一个 <code>zip</code> 压缩文件，里面包含了一些 <code>Python</code> 的字节码文件.</li>
-<li>破解的原理大概是在 <code>Python</code> 中采用类似 <code>Java</code> 动态代理的技术，将原本读取用户属性的调用返回值拦截，修改用户限制数量再返回.</li>
+            <h2 id="方案介绍"><a href="#方案介绍" class="headerlink" title="方案介绍"></a>方案介绍</h2><h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p><img src="/./img/image2022-12-12_20-11-38.png"></p>
+<h2 id="其中有两个地方需要修改"><a href="#其中有两个地方需要修改" class="headerlink" title="其中有两个地方需要修改"></a>其中有两个地方需要修改</h2><ul>
+<li><code>corpid</code>: 企业微信的企业ID</li>
+<li><code>corpsecret</code>: 拥有通讯录的企业微信的Secret</li>
 </ul>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><code>2.9.0</code> 以下版本破解的目标文件是 <code>/pyovpn/lic/uprop.pyo</code>, <code>2.9.0</code> 及以上是 <code>/pyovpn/lic/uprop.pyc</code>; 按照网上流行的破解方法，把这个文件解压出来并改名为 <code>uprop2.pyo</code> 或 <code>uprop2.pyc</code>, 然后新建一个 <code>uprop.py</code> 文件，内容如下:</p>
-<p><code>**2.9.0**</code><strong>以下版本内容:</strong></p>
-<pre><code class="shell">import uprop2
-old_figure = None
-
-def new_figure(self, licdict):
-    ret = old_figure(self, licdict)
-    ret[&#39;concurrent_connections&#39;] = 1024
-    return ret
-
-
-for x in dir(uprop2):
-    if x[:2] == &#39;__&#39;:
-        continue
-    if x == &#39;UsageProperties&#39;:
-        exec(&#39;old_figure = uprop2.UsageProperties.figure&#39;)
-        exec(&#39;uprop2.UsageProperties.figure = new_figure&#39;)
-    exec(&#39;%s = uprop2.%s&#39; % (x, x))
+<h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><pre><code class="go">package auth
+import (
+    &quot;io/ioutil&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+    &quot;strconv&quot;
+    &quot;github.com/tidwall/gjson&quot;
+)
+func GetAccessToken() string &#123;
+    return GetWecomToken()
+&#125;
+// 从企业微信获取Token
+func GetWecomToken() string &#123;
+    //创建一个请求
+    req, err := http.NewRequest(&quot;GET&quot;, &quot;https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=corpid&amp;corpsecret=corpsecret&quot;, nil)
+    if err != nil &#123;
+        log.Println(&quot;NewRquest:&quot;, err)
+    &#125;
+    client := &amp;http.Client&#123;&#125;
+    //设置请求头
+    req.Header.Set(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;)
+    //发送请求
+    resp, err := client.Do(req)
+    //关闭请求
+    defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    access_token := gjson.Get(string(body), &quot;access_token&quot;)
+    return access_token.Str
+&#125;
+// 获取员工信息
+func WeComAuth(userId string) bool &#123;
+    //创建一个请求
+    req, err := http.NewRequest(&quot;GET&quot;, `https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=`+GetAccessToken()+`&amp;userid=`+userId, nil)
+    if err != nil &#123;
+        log.Println(&quot;NewRquest:&quot;, err)
+    &#125;
+    client := &amp;http.Client&#123;&#125;
+    //设置请求头
+    req.Header.Set(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;)
+    //发送请求
+    resp, err := client.Do(req)
+    //关闭请求
+    defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    errcode := gjson.Get(string(body), &quot;errcode&quot;)
+    int, err := strconv.Atoi(errcode.Str)
+    return int == 0
+&#125;
 </code></pre>
-<p><code>**2.9.0**</code><strong>及以上版本内容:</strong></p>
-<pre><code class="shell">from pyovpn.lic import uprop2
-old_figure = None
-
-def new_figure(self, licdict):
-    ret = old_figure(self, licdict)
-    ret[&#39;concurrent_connections&#39;] = 1024
-    return ret
-
-
-for x in dir(uprop2):
-    if x[:2] == &#39;__&#39;:
-        continue
-    if x == &#39;UsageProperties&#39;:
-        exec(&#39;old_figure = uprop2.UsageProperties.figure&#39;)
-        exec(&#39;uprop2.UsageProperties.figure = new_figure&#39;)
-    exec(&#39;%s = uprop2.%s&#39; % (x, x))
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>修改<code>/etc/openvpn/server.conf</code>的验证方式，可以吧其他的验证去掉</p>
+<pre><code class="shell">auth-user-pass-verify /etc/openvpn/openvpn-wecom-password via-file
 </code></pre>
-<p>再将上面的 <code>uprop.py</code> 编译为库文件 <code>uprop.pyo</code> 或 <code>uprop.pyc</code>:</p>
-<pre><code class="shell"># &lt;2.9.0
-python2 -O -m compileall uprop.py
-# &gt;=2.9.0
-python3 -O -m compileall uprop.py &amp;&amp; mv __pycache__/uprop.cpython-37.opt-1.pyc uprop.pyc
-</code></pre>
-<blockquote>
-<p>注意 <code>uprop.cpython-37.opt-1.pyc</code> 文件名会随着 <code>python</code> 版本变化而变化.</p>
-</blockquote>
-<p>现在我们得到了一个改文件名的文件 <code>uprop2.pyo</code> 或 <code>uprop2.pyc</code>, 和一个编译出来的 <code>uprop.pyo</code> 或 <code>uprop.pyc</code>; 把这两个文件压缩到 <code>pyovpn-2.0-pyx.x.egg</code> 的 <code>/pyovpn/lic/</code> 目录下，然后去服务器替换目标文件，重启服务就 OK 了.</p>
-<h2 id="所有的操作命令"><a href="#所有的操作命令" class="headerlink" title="所有的操作命令"></a>所有的操作命令</h2><pre><code class="shell"># 把操作的文件复制出来到另外的一个文件夹下面操作
-cd /usr/local/openvpn_as/lib/python &amp; mkdir pojie &amp; cp python/pyovpn-2.0-py3.6.egg ./pojie &amp; cd pojie/
-# 改一个文件名，防止后面打包的时候把源文件覆盖了
-mv pyovpn-2.0-py3.6.egg pyovpn-2.0-py3.6.egg.bak &amp; unzip pyovpn-2.0-py3.6.egg.bak
-# 进入到需要修改的目录
-cd pyovpn/lic
-# 复制源文件改名
-mv uprop.pyc uprop2.pyc
-# 新增一个py文件，然后把文件内容复制进去，并保存
-vi uprop.py
-# 退到 pojie 文件夹，进行打包
-zip -r pyovpn-2.0-py3.6.egg EGG-INFO/ common/ pyovpn/
-# 复制文件到运行目录，覆盖
-cp pyovpn-2.0-py3.6.egg /usr/local/openvpn_as/lib/python
-# 重启服务
-systemctl restart openvpnas
+<h2 id="加解密方式"><a href="#加解密方式" class="headerlink" title="加解密方式"></a>加解密方式</h2><p>因为用到了客户端传过来的时候的加密方式，因此两边的加密方式必须一致</p>
+<pre><code class="go">package util
+import (
+    &quot;bytes&quot;
+    basicAES &quot;crypto/aes&quot;
+    &quot;crypto/cipher&quot;
+    &quot;encoding/base64&quot;
+)
+type Aes struct &#123;
+    securityKey []byte
+    iv          []byte
+&#125;
+/**
+ * constructor
+ */
+func AesTool() *Aes &#123;
+    return &amp;Aes&#123;[]byte(&quot;123&quot;), []byte(&quot;123&quot;)&#125;
+&#125;
+/**
+ * 加密
+ * @param string $plainText 明文
+ * @return bool|string
+ */
+func (a Aes) Encrypt(plainText string) (string, error) &#123;
+    block, err := basicAES.NewCipher(a.securityKey)
+    if err != nil &#123;
+        return &quot;&quot;, err
+    &#125;
+    plainTextByte := []byte(plainText)
+    blockSize := block.BlockSize()
+    plainTextByte = AddPKCS7Padding(plainTextByte, blockSize)
+    cipherText := make([]byte, len(plainTextByte))
+    mode := cipher.NewCBCEncrypter(block, a.iv)
+    mode.CryptBlocks(cipherText, plainTextByte)
+    return base64.StdEncoding.EncodeToString(cipherText), nil
+&#125;
+/**
+ * 解密
+ * @param string $cipherText 密文
+ * @return bool|string
+ */
+func (a Aes) Decrypt(cipherText string) (string, error) &#123;
+    block, err := basicAES.NewCipher(a.securityKey)
+    if err != nil &#123;
+        return &quot;&quot;, err
+    &#125;
+    cipherDecodeText, decodeErr := base64.StdEncoding.DecodeString(cipherText)
+    if decodeErr != nil &#123;
+        return &quot;&quot;, decodeErr
+    &#125;
+    mode := cipher.NewCBCDecrypter(block, a.iv)
+    originCipherText := make([]byte, len(cipherDecodeText))
+    mode.CryptBlocks(originCipherText, cipherDecodeText)
+    originCipherText = StripPKSC7Padding(originCipherText)
+    return string(originCipherText), nil
+&#125;
+/**
+ * 填充算法
+ * @param string $source
+ * @return string
+ */
+func AddPKCS7Padding(ciphertext []byte, blockSize int) []byte &#123;
+    padding := blockSize - len(ciphertext)%blockSize
+    paddingText := bytes.Repeat([]byte&#123;byte(padding)&#125;, padding)
+    return append(ciphertext, paddingText...)
+&#125;
+/**
+ * 移去填充算法
+ * @param string $source
+ * @return string
+ */
+func StripPKSC7Padding(cipherText []byte) []byte &#123;
+    length := len(cipherText)
+    unpadding := int(cipherText[length-1])
+    return cipherText[:(length - unpadding)]
+&#125;
 </code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
@@ -273,9 +333,9 @@ systemctl restart openvpnas
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">3 <p>Articles</p></a></li>
+                    <li><a href="/">4 <p>Articles</p></a></li>
                     <li><a href="/categories">0 <p>Categories</p></a></li>
-                    <li><a href="/tags">7 <p>Tags</p></a></li>
+                    <li><a href="/tags">11 <p>Tags</p></a></li>
                 </ul>
             </div>
             
@@ -284,7 +344,7 @@ systemctl restart openvpnas
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85%EF%BC%88%E9%9C%80%E8%A6%81%E7%BF%BB%E5%A2%99%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">在线安装（需要翻墙）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%91%98%E7%99%BB%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">管理员登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%B4%E8%A7%A3%E7%94%A8%E6%88%B7%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">破解用户数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E6%9C%89%E7%9A%84%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">所有的操作命令</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">方案介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="toc-number">1.1.</span> <span class="toc-text">时序图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%B8%AD%E6%9C%89%E4%B8%A4%E4%B8%AA%E5%9C%B0%E6%96%B9%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9"><span class="toc-number">2.</span> <span class="toc-text">其中有两个地方需要修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B"><span class="toc-number">3.</span> <span class="toc-text">代码如下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">加解密方式</span></a></li></ol>
                 </div>
             </div>
             

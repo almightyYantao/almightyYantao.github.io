@@ -5,13 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>通过 Haproxy 实现 Shadowshadows 负载均衡 - YanTao的线上笔记本</title>
+    <title>安装&amp;破解Openvpn Access Server - YanTao的线上笔记本</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="yantao 技术博客 笔记本,"> 
-    <meta name="description" content="介绍缺点：所有的SS的加密方式和密码必须一致介绍：HAProxy是一个使用C语言编写的自由及开放原始码软件，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。
-安装Haproxyyu,"> 
+    <meta name="description" content="在线安装（需要翻墙）yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm
+yum -y install openv,"> 
     <meta name="author" content="Yan Tao"> 
     <link rel="alternative" href="atom.xml" title="YanTao的线上笔记本" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -75,7 +75,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://almightyyantao.github.io">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">通过 Haproxy 实现 Shadowshadows 负载均衡</h3>
+        <h3 class="subtitle">安装&破解Openvpn Access Server</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -109,14 +109,14 @@
                 
                 December 13, 2022
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2022/12/13/haproxy-load/" title="通过 Haproxy 实现 Shadowshadows 负载均衡" class="">通过 Haproxy 实现 Shadowshadows 负载均衡</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2022/12/13/openvpn/openvpn-access-server/" title="安装&amp;破解Openvpn Access Server" class="">安装&amp;破解Openvpn Access Server</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    3.1k
+                    3.7k
                 </span>
                 
                 
@@ -126,7 +126,7 @@
                 </span>
                 
                 
-                <span id="/2022/12/13/haproxy-load/" class="leancloud_visitors" data-flag-title="通过 Haproxy 实现 Shadowshadows 负载均衡">
+                <span id="/2022/12/13/openvpn/openvpn-access-server/" class="leancloud_visitors" data-flag-title="安装&破解Openvpn Access Server">
                     <b class="iconfont icon-read"></b> <i>Read count</i>
                     <span class="leancloud-visitors-count">1000000</span>
                 </span>
@@ -134,6 +134,8 @@
                 
             </p>
             
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/2-9-0/" rel="tag">2.9.0</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn/" rel="tag">openvpn</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/openvpn-access-server/" rel="tag">openvpn access server</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%A0%B4%E8%A7%A3/" rel="tag">破解</a></li></ul>
             
         </div>
     </div>
@@ -154,63 +156,85 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>缺点：所有的SS的加密方式和密码必须一致<br>介绍：HAProxy是一个使用C语言编写的自由及开放原始码软件，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。</p>
-<h2 id="安装Haproxy"><a href="#安装Haproxy" class="headerlink" title="安装Haproxy"></a>安装Haproxy</h2><pre><code class="shell">yum install haproxy
+            <h2 id="在线安装（需要翻墙）"><a href="#在线安装（需要翻墙）" class="headerlink" title="在线安装（需要翻墙）"></a>在线安装（需要翻墙）</h2><pre><code class="shell">yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm
+yum -y install openvpn-as
 </code></pre>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><pre><code class="shell">global
-    chroot  /var/lib/haproxy
-    pidfile /var/run/haproxy.pid
-    user    haproxy
-    group   haproxy
-defaults
-    mode    tcp                         #服务器默认的工作模式
-    balance roundrobin                  #服务器默认使用的均衡模式
-    retries 3                           #三次连接失败表示服务器不可用
-    maxconn 5000                        #最大连接数
-    timeout connect 500ms               #连接超时
-    timeout client  3s                  #客户端超时
-    timeout server  3s                  #服务器超时
-
-
-listen WebPanel
-    mode    http                        #这里使用HTTP模式
-    bind    10.1.1.58:9595               #WEB服务端口
-    stats   refresh 5s                  #自动刷新时间
-    stats   uri  /                      #WEB管理地址
-    stats   auth admin:xxxx         #账号密码
-    stats   hide-version                #隐藏版本
-    stats   admin if TRUE               #验证通过则赋予管理权
-
-frontend shadowsocks-in
-    bind *:50001
-    default_backend servers
-
-backend servers
-    mode tcp
-    balance roundrobin
-    # option external-check
-    option tcp-check
-    # external-check command &quot;/etc/haproxy/haproxy-shadowsocks-checker.py&quot;
-
-    server ss1 43.156.100.84:2195 check inter 500 rise 2 fall 4 weight 100   #SS/SSR服务器地址与端口
-    server ss2 42.157.192.42:10108 check inter 500 rise 2 fall 4 weight 100
+<h2 id="管理员登录"><a href="#管理员登录" class="headerlink" title="管理员登录"></a>管理员登录</h2><p>首先需要修改管理员密码</p>
+<pre><code class="shell">passwd openvpn
 </code></pre>
-<p><code>server</code>：后面首先跟名字，名字随便起呗，自己能够区分就行。紧接着跟SS的公网IP+端口，端口也就是SS&#x2F;SSR的端口。<br><code>check</code>：是检测的意思，这段配置很重要<br><code>inter</code>：单位毫秒，我配置的500，即500毫秒检测一次目标服务器。<br><code>rise2</code>：设定健康状态检查中，某离线的服务器从离线状态转换至正常状态需要成功检查的次数，这里我设置的2次。<br><code>fall4</code>：确认服务器从正常状态转换为不可用状态需要检查的次数，这里是4次。<br><code>weight</code>：权重，值越大代表这台机器工作的机会越多，这里我们可以把一台线路较好的机器的权重设置高一些。<br><code>balance</code>：负载均衡方式</p>
-<ul>
-<li>roundrobin：基于权重进行轮叫，在服务器的处理时间保持均匀分布时，这是最平衡、最公平的算法。此算法是动态的，这表示其权重可以在运行时进行调整，不过，在设计上，每个后端服务器仅能最多接受4128个连接；</li>
-<li>static-rr：基于权重进行轮叫，与roundrobin类似，但是为静态方法，在运行时调整其服务器权重不会生效；不过，其在后端服务器连接数上没有限制；</li>
-<li>leastconn：新的连接请求被派发至具有最少连接数目的后端服务器；在有着较长时间会话的场景中推荐使用此算法，如LDAP、SQL等，其并不太适用于较短会话的应用层协议，如HTTP；此算法是动态的，可以在运行时调整其权重；</li>
-<li>source：将请求的源地址进行hash运算，并由后端服务器的权重总数相除后派发至某匹配的服务器；这可以使得同一个客户端IP的请求始终被派发至某特定的服务器；不过，当服务器权重总数发生变化时，如某服务器宕机或添加了新的服务器，许多客户端的请求可能会被派发至与此前请求不同的服务器；常用于 负载均衡无cookie功能的基于TCP的协议；其默认为静态，不过也可以使用hash-type修改此特性；</li>
+<p>输入之后可以登录管理员页面了。</p>
+<p>如果密码一直错误的话，说明修改失败了，可以查看下原来的密码是什么</p>
+<pre><code class="shell">cat /usr/local/openvpn_as/init.log
+</code></pre>
+<p>登录后点击User Management–&gt;User Permissions 添加用户</p>
+<h2 id="破解用户数"><a href="#破解用户数" class="headerlink" title="破解用户数"></a>破解用户数</h2><ul>
+<li>主要操作的文件是一个名叫 <code>pyovpn-2.0-pyx.x.egg</code> 的文件，以我了解的情况来看，从 <code>2.5.0</code> 到 <code>2.9.x</code> 文件名一直都是这个，只是不同版本里面的内容不一样.</li>
+<li>这个文件有点类似 <code>Java</code> 当中的 <code>jar</code> 库文件，也是一个 <code>zip</code> 压缩文件，里面包含了一些 <code>Python</code> 的字节码文件.</li>
+<li>破解的原理大概是在 <code>Python</code> 中采用类似 <code>Java</code> 动态代理的技术，将原本读取用户属性的调用返回值拦截，修改用户限制数量再返回.</li>
 </ul>
-<h2 id="修改Shadowsocks配置"><a href="#修改Shadowsocks配置" class="headerlink" title="修改Shadowsocks配置"></a>修改Shadowsocks配置</h2><pre><code class="shell">&#123;
-    &quot;server&quot;:&quot;127.0.0.1&quot;, # 这里改成Haproxy的地址
-    &quot;server_port&quot;:50001, # 这里改成Haproxy监听的端口
-    &quot;local_port&quot;:1080, # 这里本地监听端口
-    &quot;password&quot;:&quot;qunheadmin&quot;,
-    &quot;timeout&quot;:60,
-    &quot;method&quot;:&quot;aes-256-gcm&quot;,
-    &quot;mode&quot;:&quot;tcp_and_udp&quot;
-&#125;
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><code>2.9.0</code> 以下版本破解的目标文件是 <code>/pyovpn/lic/uprop.pyo</code>, <code>2.9.0</code> 及以上是 <code>/pyovpn/lic/uprop.pyc</code>; 按照网上流行的破解方法，把这个文件解压出来并改名为 <code>uprop2.pyo</code> 或 <code>uprop2.pyc</code>, 然后新建一个 <code>uprop.py</code> 文件，内容如下:</p>
+<p><code>**2.9.0**</code><strong>以下版本内容:</strong></p>
+<pre><code class="shell">import uprop2
+old_figure = None
+
+def new_figure(self, licdict):
+    ret = old_figure(self, licdict)
+    ret[&#39;concurrent_connections&#39;] = 1024
+    return ret
+
+
+for x in dir(uprop2):
+    if x[:2] == &#39;__&#39;:
+        continue
+    if x == &#39;UsageProperties&#39;:
+        exec(&#39;old_figure = uprop2.UsageProperties.figure&#39;)
+        exec(&#39;uprop2.UsageProperties.figure = new_figure&#39;)
+    exec(&#39;%s = uprop2.%s&#39; % (x, x))
+</code></pre>
+<p><code>**2.9.0**</code><strong>及以上版本内容:</strong></p>
+<pre><code class="shell">from pyovpn.lic import uprop2
+old_figure = None
+
+def new_figure(self, licdict):
+    ret = old_figure(self, licdict)
+    ret[&#39;concurrent_connections&#39;] = 1024
+    return ret
+
+
+for x in dir(uprop2):
+    if x[:2] == &#39;__&#39;:
+        continue
+    if x == &#39;UsageProperties&#39;:
+        exec(&#39;old_figure = uprop2.UsageProperties.figure&#39;)
+        exec(&#39;uprop2.UsageProperties.figure = new_figure&#39;)
+    exec(&#39;%s = uprop2.%s&#39; % (x, x))
+</code></pre>
+<p>再将上面的 <code>uprop.py</code> 编译为库文件 <code>uprop.pyo</code> 或 <code>uprop.pyc</code>:</p>
+<pre><code class="shell"># &lt;2.9.0
+python2 -O -m compileall uprop.py
+# &gt;=2.9.0
+python3 -O -m compileall uprop.py &amp;&amp; mv __pycache__/uprop.cpython-37.opt-1.pyc uprop.pyc
+</code></pre>
+<blockquote>
+<p>注意 <code>uprop.cpython-37.opt-1.pyc</code> 文件名会随着 <code>python</code> 版本变化而变化.</p>
+</blockquote>
+<p>现在我们得到了一个改文件名的文件 <code>uprop2.pyo</code> 或 <code>uprop2.pyc</code>, 和一个编译出来的 <code>uprop.pyo</code> 或 <code>uprop.pyc</code>; 把这两个文件压缩到 <code>pyovpn-2.0-pyx.x.egg</code> 的 <code>/pyovpn/lic/</code> 目录下，然后去服务器替换目标文件，重启服务就 OK 了.</p>
+<h2 id="所有的操作命令"><a href="#所有的操作命令" class="headerlink" title="所有的操作命令"></a>所有的操作命令</h2><pre><code class="shell"># 把操作的文件复制出来到另外的一个文件夹下面操作
+cd /usr/local/openvpn_as/lib/python &amp; mkdir pojie &amp; cp python/pyovpn-2.0-py3.6.egg ./pojie &amp; cd pojie/
+# 改一个文件名，防止后面打包的时候把源文件覆盖了
+mv pyovpn-2.0-py3.6.egg pyovpn-2.0-py3.6.egg.bak &amp; unzip pyovpn-2.0-py3.6.egg.bak
+# 进入到需要修改的目录
+cd pyovpn/lic
+# 复制源文件改名
+mv uprop.pyc uprop2.pyc
+# 新增一个py文件，然后把文件内容复制进去，并保存
+vi uprop.py
+# 退到 pojie 文件夹，进行打包
+zip -r pyovpn-2.0-py3.6.egg EGG-INFO/ common/ pyovpn/
+# 复制文件到运行目录，覆盖
+cp pyovpn-2.0-py3.6.egg /usr/local/openvpn_as/lib/python
+# 重启服务
+systemctl restart openvpnas
 </code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
@@ -260,7 +284,7 @@ backend servers
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Haproxy"><span class="toc-number">2.</span> <span class="toc-text">安装Haproxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9Shadowsocks%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">修改Shadowsocks配置</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85%EF%BC%88%E9%9C%80%E8%A6%81%E7%BF%BB%E5%A2%99%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">在线安装（需要翻墙）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%91%98%E7%99%BB%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">管理员登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%B4%E8%A7%A3%E7%94%A8%E6%88%B7%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">破解用户数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E6%9C%89%E7%9A%84%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">所有的操作命令</span></a></li></ol>
                 </div>
             </div>
             

@@ -77,7 +77,7 @@
                 <div class="content animated fadeIn">
                     <div class="set">
                         <h1 style="text-align: center">Archived</h1>
-                        <p style="text-align: center">「 3 」</p>
+                        <p style="text-align: center">「 4 」</p>
                         <ul class="timeline timeline-centered">
                             
                             
@@ -119,7 +119,7 @@ headers = &#123;&#39;Content-Type&#39;: ...
                                     </div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2022/12/13/openvpn-access-server/">安装&amp;破解Openvpn Access Server</a>
+                                        <a class="timeline-title" target="_self" href="/2022/12/13/openvpn/openvpn-access-server/">安装&amp;破解Openvpn Access Server</a>
                                         <p>
                                             在线安装（需要翻墙）yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm
 yum -y install openvpn-as
@@ -150,6 +150,31 @@ cat /usr/...
     chroot  /var/lib/haproxy
     pidfile /var/run/haproxy.pid
     user...
+                                        </p>
+                                    </div>
+                                </li>
+                            
+                                
+                                <li class="timeline-item">
+                                    <div class="timeline-info">
+                                        <span class="gradient-text">December 13, 2022</span>
+                                    </div>
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <a class="timeline-title" target="_self" href="/2022/12/13/openvpn/openvpn-auth/">openvpn-auth（支持企业微信认证&amp;LDAP）</a>
+                                        <p>
+                                            方案介绍时序图
+其中有两个地方需要修改
+corpid: 企业微信的企业ID
+corpsecret: 拥有通讯录的企业微信的Secret
+
+代码如下package auth
+import (
+    &quot;io/ioutil&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+    &quot;strconv&quot;
+    &qu...
                                         </p>
                                     </div>
                                 </li>
