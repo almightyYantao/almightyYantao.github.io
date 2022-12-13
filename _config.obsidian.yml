@@ -118,7 +118,7 @@ gitalk:
 # Valine 评论插件 (推荐使用!)
 # 查看 https://valine.js.org/quickstart.html
 valine:
-  enable: true
+  enable: false
   app_id: 'rorG5VPu1CyNObcc8inI3QSg-gzGzoHsz'
   app_key: '6M1zagmoBK4gBS8BCI9eWKId'
   notify: false
