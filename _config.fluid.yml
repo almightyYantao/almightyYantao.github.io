@@ -1,0 +1,48 @@
+navbar:
+  menu:
+  blog_title: YanTao的博客小站
+
+lazyload:
+  enable: true
+  loading_img: /img/loading.gif
+  onlypost: false
+  offset_factor: 2
+
+
+font:  # 主题字体配置
+  font_size: 16px        # 全局字号
+  font_family:           # 全局字体族
+  code_font_size: 85%    # 代码的字号
+
+
+footer:
+  statistics:
+    enable: true
+    source: "busuanzi"  # 可选 leancloud | busuanzi  根据自己需求选择
+    pv_format: "总访问量 {} 次"  # 显示的文本，{}是数字的占位符（必须包含)，下同
+    uv_format: "总访客数 {} 人"
+
+
+index:
+  slogan:
+    enable: true
+    text: 一个混迹在IT行业的菜鸟
+    api:
+      enable: false
+      url: "https://almightyyantao.github.io"
+      method: "GET"
+      headers: {}
+      keys: ["yantao","博客","IT"]
+
+code:
+  copy_btn: true
+  highlight:
+    enable: true
+    line_number: true
+    lib: "highlightjs"
+    highlightjs:
+      style: 'Github Gist'
+      bg_color: false
+    prismjs:
+      style: "default"
+      preprocess: true

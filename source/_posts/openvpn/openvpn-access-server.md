@@ -1,6 +1,7 @@
 ---
 title: 安装&破解Openvpn Access Server
 tags: [ '2.9.0','openvpn','openvpn access server','破解' ]
+index_img: "/img/openvpn.webp"
 ---
 
 ## 在线安装（需要翻墙）
