@@ -132,7 +132,7 @@ iptables -t nat -D PREROUTING -s 10.207.0.0/16 -d 10.0.0.0/8 -j ACCEPT
 iptables -t nat -D SSTP_POSTROUTING -s 10.207.0.0/16 -j MASQUERADE
 &#125;
 </code></pre>
-<p>以下配置需要特别注意，如果不知道如何配置的，那么就按照我这么默认配置即可<br>具体配置介绍：<a target="_blank" rel="noopener" href="https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E">https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E</a><br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216142810.png" /><br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216142810.png" /></p>
+<p>以下配置需要特别注意，如果不知道如何配置的，那么就按照我这么默认配置即可<br>具体配置介绍：<a target="_blank" rel="noopener" href="https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E">https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E</a><br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216143840.png"/><br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216142810.png" /></p>
 <h2 id="3、设置ss-libev代理"><a href="#3、设置ss-libev代理" class="headerlink" title="3、设置ss-libev代理"></a>3、设置ss-libev代理</h2><pre><code class="bash">#新版本(v4.``6.1``及以上)
 #第一次运行时，请执行下面这两个操作
 #``1``.创建proxy用户和组: useradd -Mr -d/tmp -s/bin/bash proxy
