@@ -29,6 +29,27 @@
     
     
     <entry>
+      <title>清理自定义DHCP下发，异常断开导致IP地址占用的问题</title>
+      <link href="/2023/02/16/openvpn/clearOpenvpnInvalidIp/"/>
+      <url>/2023/02/16/openvpn/clearOpenvpnInvalidIp/</url>
+      
+        <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>因为OpenVpn存在断开重连的机制，如果突然出现网络抖动，用户端没有触发断开命令，但是同时又触发了重新连接的命令，这时候VPN这里就会重新给下发一个新的地址，但是老的地址不会回收掉，这个也是很早之前DHCP被用完的真正原因</p><h1 id="处理方式"><a href="#处理方式" class="headerlink" title="处理方式"></a>处理方式</h1><p>在每一台openvpn的机器上新增一个shell脚本做定时任务，每天临晨2点开始循环遍历</p><pre><code class="bash">#!/bin/bashIFS=$&#39;\n&#39; # 修改默认分隔符OLDIFS=&quot;$IFS&quot; # 清理无效的IP地址function clearIp()&#123;    # 取出当前已经分配下去的所有IP地址    result=$(curl -s &quot;后端获取当前使用IP的接口地址&quot;);    ipList=`echo $result | jq &#39;.d.result&#39;`;    ipListLength=`echo $ipList | jq &#39;.|length&#39;`;    date=`date &quot;+%Y-%m-%d %H:%M:%S&quot;`     # 循环所有的数据    for index in `seq 0 $ipListLength`    do        ip=`echo $ipList | jq -r &quot;.[$index].ip&quot;`;        common_name=`echo $ipList | jq -r &quot;.[$index].user&quot;`        # 拿到当前真正在使用的IP地址        useIp=`cat /var/log/openvpn/status.log | grep CLIENT_LIST | awk &#39;&#123;if (NR&gt;1)&#123;print $1&#125;&#125;&#39; | cut -d &#39;,&#39; -f 4`        # 如果当前IP已经不在使用了，那么就需要释放，防止后期地址池不够用的情况        if [[ &quot;$&#123;useIp[@]&#125;&quot;  =~ &quot;$&#123;ip&#125;&quot; ]]; then            echo &quot;$&#123;date&#125; | $&#123;ip&#125; | 当前IP属于使用状态，无需释放&quot;;        else            curl -s &quot;释放IP的接口地址&quot; &gt;&gt; /var/log/openvpn/disconnect.log            echo &quot;$&#123;date&#125; | $&#123;ip&#125; | $&#123;common_name&#125; | 当前IP需要释放&quot;        fi    done&#125; # 清理Iptable的规则function clearIptable()&#123;    iptableResult=($(iptables -L | grep 10.207 | grep ACCEPT | awk &#39;&#123;print $7&#125;&#39;))    iptableResultCount=($(iptables -L | grep 10.207 | grep ACCEPT | awk &#39;&#123;print $7&#125;&#39; | wc -l))    date=`date &quot;+%Y-%m-%d %H:%M:%S&quot;`    for item in $&#123;iptableResult[@]&#125;    do        ip=`echo $item | cut -d &#39;-&#39; -f 2`        common_name=`echo $item | cut -d &#39;-&#39; -f 1`        ifconfig_pool_remote_ip=$ip        useIp=`cat /var/log/openvpn/status.log | grep CLIENT_LIST | awk &#39;&#123;if (NR&gt;1)&#123;print $1&#125;&#125;&#39; | cut -d &#39;,&#39; -f 4`        # 如果当前IP已经不在使用了，那么就需要释放，防止后期地址池不够用的情况        if [[ &quot;$&#123;useIp[@]&#125;&quot;  =~ &quot;$&#123;ip&#125;&quot; ]]; then            echo &quot;$&#123;date&#125; | $&#123;ip&#125; | 当前IP属于使用状态，无需释放&quot;;        else            echo &quot;$&#123;date&#125; | $&#123;ifconfig_pool_remote_ip&#125; | $&#123;common_name&#125; | 当前IP需要释放&quot;            /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125; dst -j ACCEPT            /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;-drop dst -j DROP            /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -j DROP            /sbin/ipset destroy $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;            /sbin/ipset destroy $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;-drop        fi    done&#125; clearIp()clearIptable()</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> openvpn </tag>
+            
+            <tag> dhcp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>openvpn动态下发权限</title>
       <link href="/2022/12/14/openvpn/openvpn-dynamic-route-permissions/"/>
       <url>/2022/12/14/openvpn/openvpn-dynamic-route-permissions/</url>
@@ -62,9 +83,9 @@
       
         <tags>
             
-            <tag> zabbix </tag>
-            
             <tag> 企业微信 </tag>
+            
+            <tag> zabbix </tag>
             
             <tag> 报警 </tag>
             
@@ -85,9 +106,9 @@
       
         <tags>
             
-            <tag> 2.9.0 </tag>
-            
             <tag> openvpn </tag>
+            
+            <tag> 2.9.0 </tag>
             
             <tag> openvpn access server </tag>
             
@@ -125,11 +146,11 @@
             
             <tag> openvpn </tag>
             
-            <tag> 企业微信 </tag>
-            
             <tag> openvpn-auth </tag>
             
             <tag> wecom </tag>
+            
+            <tag> 企业微信 </tag>
             
             <tag> 认证 </tag>
             

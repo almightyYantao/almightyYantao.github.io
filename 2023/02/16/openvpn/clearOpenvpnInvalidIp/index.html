@@ -1,0 +1,72 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>清理自定义DHCP下发，异常断开导致IP地址占用的问题</title><meta name="description" content="混迹在IT行业的小菜鸟"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="背景因为OpenVpn存在断开重连的机制，如果突然出现网络抖动，用户端没有触发断开命令，但是同时又触发了重新连接的命令，这时候VPN这里就会重新给下发一个新的地址，但是老的地址不会回收掉，这个也是很早之前DHCP被用完的真正原因
+处理方式在每一台openvpn的机器上新增一个shell脚本做定时任务，每天临晨2点开始循环遍历
+#!/bin/bash
+IFS=$&amp;#39;\n&amp;#39; # 修改默认分隔符
+OLDIFS=&amp;quot;$IFS&amp;quot;
+ 
+# 清理无效的IP地址
+function clearIp()&amp;#123;
+    # 取出当前已经分配下去的所有IP地址
+    result=$(curl -s &amp;quot;后端获取当前使用IP的接口地址&amp;quot;);
+    ipList=`echo.."><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="YanTao的线上笔记本" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Almighty.Yantao's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">清理自定义DHCP下发，异常断开导致IP地址占用的问题</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="toc-text">处理方式</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/openvpn"><i class="tag post-item-tag">openvpn</i></a><a href="/tags/dhcp"><i class="tag post-item-tag">dhcp</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">清理自定义DHCP下发，异常断开导致IP地址占用的问题</h1><time class="has-text-grey" datetime="2023-02-15T16:00:00.000Z">2023-02-16</time><article class="mt-2 post-content"><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>因为OpenVpn存在断开重连的机制，如果突然出现网络抖动，用户端没有触发断开命令，但是同时又触发了重新连接的命令，这时候VPN这里就会重新给下发一个新的地址，但是老的地址不会回收掉，这个也是很早之前DHCP被用完的真正原因</p>
+<h1 id="处理方式"><a href="#处理方式" class="headerlink" title="处理方式"></a>处理方式</h1><p>在每一台openvpn的机器上新增一个shell脚本做定时任务，每天临晨2点开始循环遍历</p>
+<pre><code class="bash">#!/bin/bash
+IFS=$&#39;\n&#39; # 修改默认分隔符
+OLDIFS=&quot;$IFS&quot;
+ 
+# 清理无效的IP地址
+function clearIp()&#123;
+    # 取出当前已经分配下去的所有IP地址
+    result=$(curl -s &quot;后端获取当前使用IP的接口地址&quot;);
+    ipList=`echo $result | jq &#39;.d.result&#39;`;
+    ipListLength=`echo $ipList | jq &#39;.|length&#39;`;
+    date=`date &quot;+%Y-%m-%d %H:%M:%S&quot;`
+ 
+    # 循环所有的数据
+    for index in `seq 0 $ipListLength`
+    do
+        ip=`echo $ipList | jq -r &quot;.[$index].ip&quot;`;
+        common_name=`echo $ipList | jq -r &quot;.[$index].user&quot;`
+        # 拿到当前真正在使用的IP地址
+        useIp=`cat /var/log/openvpn/status.log | grep CLIENT_LIST | awk &#39;&#123;if (NR&gt;1)&#123;print $1&#125;&#125;&#39; | cut -d &#39;,&#39; -f 4`
+        # 如果当前IP已经不在使用了，那么就需要释放，防止后期地址池不够用的情况
+        if [[ &quot;$&#123;useIp[@]&#125;&quot;  =~ &quot;$&#123;ip&#125;&quot; ]]; then
+            echo &quot;$&#123;date&#125; | $&#123;ip&#125; | 当前IP属于使用状态，无需释放&quot;;
+        else
+            curl -s &quot;释放IP的接口地址&quot; &gt;&gt; /var/log/openvpn/disconnect.log
+            echo &quot;$&#123;date&#125; | $&#123;ip&#125; | $&#123;common_name&#125; | 当前IP需要释放&quot;
+        fi
+    done
+&#125;
+ 
+# 清理Iptable的规则
+function clearIptable()&#123;
+    iptableResult=($(iptables -L | grep 10.207 | grep ACCEPT | awk &#39;&#123;print $7&#125;&#39;))
+    iptableResultCount=($(iptables -L | grep 10.207 | grep ACCEPT | awk &#39;&#123;print $7&#125;&#39; | wc -l))
+    date=`date &quot;+%Y-%m-%d %H:%M:%S&quot;`
+    for item in $&#123;iptableResult[@]&#125;
+    do
+        ip=`echo $item | cut -d &#39;-&#39; -f 2`
+        common_name=`echo $item | cut -d &#39;-&#39; -f 1`
+        ifconfig_pool_remote_ip=$ip
+        useIp=`cat /var/log/openvpn/status.log | grep CLIENT_LIST | awk &#39;&#123;if (NR&gt;1)&#123;print $1&#125;&#125;&#39; | cut -d &#39;,&#39; -f 4`
+        # 如果当前IP已经不在使用了，那么就需要释放，防止后期地址池不够用的情况
+        if [[ &quot;$&#123;useIp[@]&#125;&quot;  =~ &quot;$&#123;ip&#125;&quot; ]]; then
+            echo &quot;$&#123;date&#125; | $&#123;ip&#125; | 当前IP属于使用状态，无需释放&quot;;
+        else
+            echo &quot;$&#123;date&#125; | $&#123;ifconfig_pool_remote_ip&#125; | $&#123;common_name&#125; | 当前IP需要释放&quot;
+            /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125; dst -j ACCEPT
+            /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;-drop dst -j DROP
+            /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -j DROP
+            /sbin/ipset destroy $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;
+            /sbin/ipset destroy $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;-drop
+        fi
+    done
+&#125;
+ 
+clearIp()
+clearIptable()
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/02/16/ssTproxyTransparentAgent/" title="ss-tproxy 透明代理的设置方法"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: ss-tproxy 透明代理的设置方法</span></a><a class="button is-default" href="/2022/12/14/openvpn/openvpn-dynamic-route-permissions/" title="openvpn动态下发权限"><span class="has-text-weight-semibold">下一页: openvpn动态下发权限</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/almightyYantao"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Almighty.Yantao 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
