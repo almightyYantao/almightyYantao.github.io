@@ -59,7 +59,7 @@ pagination_dir: page
 include: null
 exclude: null
 ignore: null
-theme: fluid
+theme: hexo-theme-Claudia
 deploy:
   type: git
   repo: https://github.com/almightyYantao/almightyYantao.github.io.git
