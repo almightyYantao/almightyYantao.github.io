@@ -156,7 +156,7 @@ iptables -t nat -D SSTP_POSTROUTING -s 10.207.0.0/16 -j MASQUERADE
 
 以下配置需要特别注意，如果不知道如何配置的，那么就按照我这么默认配置即可
 具体配置介绍：[https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E](https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
-<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216142810.png" />
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216143840.png"/>
 <img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216142810.png" />
 
 ## 3、设置ss-libev代理
