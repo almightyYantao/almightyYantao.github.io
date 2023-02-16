@@ -3,6 +3,7 @@ title: ss-tproxy 透明代理的设置方法
 date: 2023-02-16  
 tags: ['代理','透明代理','vpn','流量转发']  
 ---
+<meta name="referrer" content="no-referrer" />
 
 # 一、介绍
 ## 1、什么是透明代理
@@ -155,8 +156,8 @@ iptables -t nat -D SSTP_POSTROUTING -s 10.207.0.0/16 -j MASQUERADE
 
 以下配置需要特别注意，如果不知道如何配置的，那么就按照我这么默认配置即可
 具体配置介绍：[https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E](https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
-![](https://s2.loli.net/2023/02/16/bUJiFnwT2EdSLkC.png)
-![](https://s2.loli.net/2023/02/16/8kDZgLQF4BC53Yb.png)
+![图片一](https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216142427.png)
+![](https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230216142810.png)
 
 ## 3、设置ss-libev代理
 ```bash
