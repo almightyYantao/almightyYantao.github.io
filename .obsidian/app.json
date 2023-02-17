@@ -2,5 +2,9 @@
   "userIgnoreFilters": [
     "source/"
   ],
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "readableLineLength": false,
+  "showLineNumber": true,
+  "showFrontmatter": false,
+  "strictLineBreaks": true
 }
