@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>记录一次办公网全球化的改造计划</title>
+      <link href="/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91Panabit%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92/"/>
+      <url>/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91Panabit%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92/</url>
+      
+        <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>办公网每次去海外找资料都需要重新连接VPN，或者自己连接自己买的小飞机之类的才可以。但是这种在互联网公司内的话，非常的不友好；为公司工作还要自己花钱买小飞机～</p><p>之前尝试过下面这种方式：<br>新增一台海外的机器（新加坡、香港）搭建SS&#x2F;v2ray&#x2F;trojan之类的协议，然后办公网新增一个软路由去连接，通过ACL把部分IP的用户跳转过去；<br>但是这种方式自己家里用用还行，如果想要在企业的办公网来使用的话，人一多就不行，因为所有人都从这个IP出去了，而且每次都需要命令行去操作ACL增加用户，非常的麻烦；</p><h1 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h1><table><thead><tr><th>名词</th><th>介绍</th></tr></thead><tbody><tr><td>Panabit</td><td>Panabit是国内X86平台单板处理能力最高（双向40G）、在运营商和高校等行业案例过千（X运营商千兆以上规格共计400余台已普遍连续稳定运行至第7年），实时对超过3TB的网络带宽进行DPI识别与优化服务、并针对中小企业提供免费版本（软件形态），是以DPI为核心优势并发展起来的专业、上线效果好、性价比高的新一代应用网关。进入2014年，实际支持国内应用协议超过800种，并已集成路由、负载均衡、认证、一拖N检测、移动终端识别、DNS管控、HTTP管控、日志审计等实用功能于一体。</td></tr></tbody></table><h1 id="Panabit-的-Iwan"><a href="#Panabit-的-Iwan" class="headerlink" title="Panabit 的 Iwan"></a>Panabit 的 Iwan</h1><p>为了解决前面的这种方式，决定测试使用 Panabit 的 Iwan 的方式，也就是所谓的 Panabit 的 <code>SD-WAN</code>；</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><h2 id="1、搭建panabit"><a href="#1、搭建panabit" class="headerlink" title="1、搭建panabit"></a>1、搭建panabit</h2><p>记得服务器申请2H的，1H需要需改核心，非常麻烦<br>下载Linux系统文件：文末<br>上传文件到root根目录下</p><pre><code class="bash">tar -xzf PanabitFREE_SUIr2p3_20220413_Linux3.tar.gzcd PanabitFREE_SUIr2p3_20220413_Linux3# 输入以下命令进行安装./ipeinstall</code></pre><p>修改<code>/etc/PG.conf</code>文件<br>因为是单网口，所以数据口和管理口都需要配置成eth0，后面不要加任何东西</p><pre><code class="bash">DATA_PORTS 修改成：DATA_PORTS=&quot;eth0&quot;</code></pre><h3 id="修改端口"><a href="#修改端口" class="headerlink" title="修改端口"></a>修改端口</h3><h4 id="上传文件，修改配置"><a href="#上传文件，修改配置" class="headerlink" title="上传文件，修改配置"></a>上传文件，修改配置</h4><p>需要上传一个joskmc文件（文件在文末）<br>在<code>/etc/PG.conf</code>中新增一下一行</p><pre><code class="bash">HTTPS_PORT=2194</code></pre><h4 id="执行joskmc"><a href="#执行joskmc" class="headerlink" title="执行joskmc"></a>执行joskmc</h4><pre><code class="bash">/root/joskmc tcp 2194</code></pre><h4 id="修改：-etc-rc-local，增加一下三行"><a href="#修改：-etc-rc-local，增加一下三行" class="headerlink" title="修改：/etc/rc.local，增加一下三行"></a>修改：<code>/etc/rc.local</code>，增加一下三行</h4><pre><code class="bash">sleep 10/root/joskmc tcp 2194</code></pre><h2 id="2、进行隧道配置（海外）"><a href="#2、进行隧道配置（海外）" class="headerlink" title="2、进行隧道配置（海外）"></a>2、进行隧道配置（海外）</h2><h3 id="1-、登录WEB页面，修改网卡方向"><a href="#1-、登录WEB页面，修改网卡方向" class="headerlink" title="(1)、登录WEB页面，修改网卡方向"></a>(1)、登录WEB页面，修改网卡方向</h3><p>默认账号密码：admin&#x2F;panabit<br>系统概况 → 网络接口：eth0，修改成对外，只有对外才可以创建WAN线路<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103308.png"/></p><h3 id="2-、创建WAN线路"><a href="#2-、创建WAN线路" class="headerlink" title="(2)、创建WAN线路"></a>(2)、创建WAN线路</h3><p>应用路由 → 接口线路：<br>需要注意，Mac地址必须克隆<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202302171033490.png"/></p><h3 id="3-、创建IWAN连接账号"><a href="#3-、创建IWAN连接账号" class="headerlink" title="(3)、创建IWAN连接账号"></a>(3)、创建IWAN连接账号</h3><p>对象管理 → 账号管理 → 组织架构：<br>地址范围：这一块可以自己定一个内网的IP段就可以，不要冲突就好<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103417.png"/><br>地址范围需要把网关地址留出来！！！！！<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103432.png"/><br>对象管理 → 账号管理 → 本地账号：<br>处理用户组需要选择前面创建的用户组，其他的根据实际情况填写<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103454.png"/></p><h3 id="4-、创建iWAN服务"><a href="#4-、创建iWAN服务" class="headerlink" title="(4)、创建iWAN服务"></a>(4)、创建iWAN服务</h3><p>应用路由 → iWAN服务 → 服务列表：<br>注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103517.png"/><br>应用路由 → iWAN服务 → 服务映射：<br>根据配置情况选择即可<br>iWAN使用的是UDP连接，因此端口需要开放UDP<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103531.png"/></p><h3 id="5-、创建策略路由"><a href="#5-、创建策略路由" class="headerlink" title="(5)、创建策略路由"></a>(5)、创建策略路由</h3><p>应用路由 → 策略路由：需要添加一条回程的全程路由，要不然DNS牵引、FQ都会失败<br>这里选择iWAN的线路<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103546.png"/></p><h2 id="3、客户端配置（办公网）"><a href="#3、客户端配置（办公网）" class="headerlink" title="3、客户端配置（办公网）"></a>3、客户端配置（办公网）</h2><h3 id="1-、新建WAN线路"><a href="#1-、新建WAN线路" class="headerlink" title="(1)、新建WAN线路"></a>(1)、新建WAN线路</h3><p>应用路由 → 接口线路 → WAN线路：按照信息提示填写即可完成iWAN线路配置<br>注意：必须有一个外网的网卡，并且最好把加密开起来<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103622.png"/><br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103634.png"/></p><h3 id="2-、设置DNS牵引"><a href="#2-、设置DNS牵引" class="headerlink" title="(2)、设置DNS牵引"></a>(2)、设置DNS牵引</h3><p>应用路由 → DNS管控：海外域名是一个域名群组，可以自己修改<br>主要解决DNS污染问题，要不然可能部分网站会无法访问<br>这里有一个很注意的点，就是你的DNS，访问DNS的链路必须经过PA，否则牵引不会生效<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103653.png"/></p><h3 id="3-、设置策略路由"><a href="#3-、设置策略路由" class="headerlink" title="(3)、设置策略路由"></a>(3)、设置策略路由</h3><p>应用路由 → 策略路由：我这边直接拿了飞连的609海外分流IP段进行分流，你也可以自己修改（文末下载）<br>主要为了只有需要海外的才出去，不能把所有的流量全部导出去<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103713.png"/></p><p>附件：<br>169IP段： <a href="https://www.123pan.com/s/cRk7Vv-frSsH">https://www.123pan.com/s/cRk7Vv-frSsH</a> 提取码:NzAF<br>Linux操作系统： <a href="https://www.123pan.com/s/cRk7Vv-arSsH">https://www.123pan.com/s/cRk7Vv-arSsH</a> 提取码:A5MC<br>joskmc： <a href="https://www.123pan.com/s/cRk7Vv-BrSsH">https://www.123pan.com/s/cRk7Vv-BrSsH</a> 提取码:kTu9</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 办公网 </tag>
+            
+            <tag> 全球化 </tag>
+            
+            <tag> 全球办公 </tag>
+            
+            <tag> 国际化 </tag>
+            
+            <tag> Panabit </tag>
+            
+            <tag> iwan </tag>
+            
+            <tag> sd-wan </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ss-tproxy 透明代理的设置方法</title>
       <link href="/2023/02/16/ssTproxyTransparentAgent/"/>
       <url>/2023/02/16/ssTproxyTransparentAgent/</url>
@@ -83,9 +114,9 @@
       
         <tags>
             
-            <tag> 企业微信 </tag>
-            
             <tag> zabbix </tag>
+            
+            <tag> 企业微信 </tag>
             
             <tag> 报警 </tag>
             
@@ -106,9 +137,9 @@
       
         <tags>
             
-            <tag> openvpn </tag>
-            
             <tag> 2.9.0 </tag>
+            
+            <tag> openvpn </tag>
             
             <tag> openvpn access server </tag>
             
@@ -144,13 +175,13 @@
       
         <tags>
             
+            <tag> 企业微信 </tag>
+            
             <tag> openvpn </tag>
             
             <tag> openvpn-auth </tag>
             
             <tag> wecom </tag>
-            
-            <tag> 企业微信 </tag>
             
             <tag> 认证 </tag>
             
