@@ -17,6 +17,17 @@ tags: ['办公网','全球化','全球办公','国际化','Panabit','iwan','sd-w
 
 # Panabit 的 Iwan
 为了解决前面的这种方式，决定测试使用 Panabit 的 Iwan 的方式，也就是所谓的 Panabit 的 `SD-WAN`；
+- 重连速度很快：  
+        比L2TP的要快一个数量级，L2TP要重连，需要有几十次交互，而我们只需要一次即可  
+- 客户端不受底层承载线路IP变化影响：  
+        当底层承载线路（比如PPPOE拨号线路）的IP地址发生变化时，不会影响iWAN隧道，iWAN隧道不会中断，保证通信正常进行；  
+        因为很多用户是通过PPPOE拨号线路出去的，PPPOE拨号线路重拨时一般会改变IP地址，如果用L2TP的话，那么这个L2TP会话就要重建；  
+        而用iWAN的话，现有的会话可以照常使用，不需要做任何改变；  
+- 传输效率高：  
+        iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压缩IP报文头，这样可以继续减少额外报文头的大小，所以能大幅度提升传输效率；  
+        如果用国际线路的话，节省下来的流量费用都是很可观的；  
+- 抗干扰：  
+        不像L2TP，中间人可以直接发包TERMINATE，iWAN控制命令有完整性检查，可以避免中间人攻击。
 
 # 部署
 ## 1、搭建panabit
@@ -97,7 +108,7 @@ iWAN使用的是UDP连接，因此端口需要开放UDP
 主要为了只有需要海外的才出去，不能把所有的流量全部导出去
 <img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103713.png"/>
 
-附件：
+# 附件
 169IP段： https://www.123pan.com/s/cRk7Vv-frSsH 提取码:NzAF
 Linux操作系统： https://www.123pan.com/s/cRk7Vv-arSsH 提取码:A5MC
 joskmc： https://www.123pan.com/s/cRk7Vv-BrSsH 提取码:kTu9
