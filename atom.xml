@@ -6,7 +6,7 @@
   <link href="https://almightyyantao.github.io/atom.xml" rel="self"/>
   
   <link href="https://almightyyantao.github.io/"/>
-  <updated>2023-02-17T02:48:44.719Z</updated>
+  <updated>2023-02-20T05:11:34.499Z</updated>
   <id>https://almightyyantao.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>curl 检测代理的可用性以及延迟</title>
+    <link href="https://almightyyantao.github.io/2023/02/20/curl%20%E6%A3%80%E6%B5%8B%E4%BB%A3%E7%90%86%E7%9A%84%E5%8F%AF%E7%94%A8%E6%80%A7%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F/"/>
+    <id>https://almightyyantao.github.io/2023/02/20/curl%20%E6%A3%80%E6%B5%8B%E4%BB%A3%E7%90%86%E7%9A%84%E5%8F%AF%E7%94%A8%E6%80%A7%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F/</id>
+    <published>2023-02-19T16:00:00.000Z</published>
+    <updated>2023-02-20T05:11:34.499Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在办公网的代理翻墙的过程中，经常没办法第一时间知道代理失效了，因为我们自身不是高用的用户，每次挂了都需要员工来反馈，体感非常的不好，因此想着可以通过<code>zabbix</code>如果把当前的延迟、可用性检测起来</p><h1 id="通过Curl-检测Google的延迟"><a href="#通过Curl-检测Google的延迟" class="headerlink" title="通过Curl 检测Google的延迟"></a>通过Curl 检测Google的延迟</h1><p>这里为啥是curl而不是ping，因为默认ping事不支持代理的，然而curl也可以做到真正的是否可用，有延迟就一定说明是可用的</p><pre><code class="bash">curl -o /dev/null -x socks5h://127.0.0.1:12126 -s --connect-timeout 5 -w %&#123;time_starttransfer&#125;&quot;\n&quot; $1</code></pre><p><code>socks5h</code>的地址需要改成你的代理地址</p><h1 id="获取当前代理的可用性"><a href="#获取当前代理的可用性" class="headerlink" title="获取当前代理的可用性"></a>获取当前代理的可用性</h1><pre><code class="bash">url=$1result=($(curl -x socks5h://localhost:12126 -I -s --connect-timeout 5 $&#123;url&#125; | head -1 | tr &quot;\r&quot; &quot;\n&quot;))if [ &quot;$&#123;result[1]&#125;&quot; == $2 -a &quot;$&#123;result[2]&#125;&quot; == &#39;OK&#39; ]then  echo 1else  echo 0fi</code></pre><h1 id="zabbix操作脚本"><a href="#zabbix操作脚本" class="headerlink" title="zabbix操作脚本"></a>zabbix操作脚本</h1><pre><code class="bash"># 延迟UserParameter=googleTime[*],/etc/zabbix/script/googleTime.sh $1# 可用UserParameter=googleCheck[*],/etc/zabbix/script/googleCheck.sh $1 $2</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;在办公网的代理翻墙的过程中，经常没办法第一时间知道代理失效了，因为我们自身不是高用的用户，每次挂了都需要员工来反馈，体感非常的不好，因此想着</summary>
+      
+    
+    
+    
+    
+    <category term="curl" scheme="https://almightyyantao.github.io/tags/curl/"/>
+    
+    <category term="代理" scheme="https://almightyyantao.github.io/tags/%E4%BB%A3%E7%90%86/"/>
+    
+    <category term="检测" scheme="https://almightyyantao.github.io/tags/%E6%A3%80%E6%B5%8B/"/>
+    
+    <category term="zabbix" scheme="https://almightyyantao.github.io/tags/zabbix/"/>
+    
+  </entry>
   
   <entry>
     <title>记录一次办公网全球化的改造计划</title>
@@ -149,9 +177,9 @@
     
     
     
-    <category term="企业微信" scheme="https://almightyyantao.github.io/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/"/>
-    
     <category term="zabbix" scheme="https://almightyyantao.github.io/tags/zabbix/"/>
+    
+    <category term="企业微信" scheme="https://almightyyantao.github.io/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/"/>
     
     <category term="报警" scheme="https://almightyyantao.github.io/tags/%E6%8A%A5%E8%AD%A6/"/>
     
@@ -220,13 +248,13 @@
     
     
     
+    <category term="企业微信" scheme="https://almightyyantao.github.io/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/"/>
+    
     <category term="openvpn" scheme="https://almightyyantao.github.io/tags/openvpn/"/>
     
     <category term="openvpn-auth" scheme="https://almightyyantao.github.io/tags/openvpn-auth/"/>
     
     <category term="wecom" scheme="https://almightyyantao.github.io/tags/wecom/"/>
-    
-    <category term="企业微信" scheme="https://almightyyantao.github.io/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/"/>
     
     <category term="认证" scheme="https://almightyyantao.github.io/tags/%E8%AE%A4%E8%AF%81/"/>
     
