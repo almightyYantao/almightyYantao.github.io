@@ -1824,10 +1824,10 @@ hexo-cli@^4.3.0:
     resolve "^1.11.0"
     tildify "^2.0.0"
 
-hexo-component-inferno@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.npmmirror.com/hexo-component-inferno/-/hexo-component-inferno-2.0.1.tgz#34c460209b4f0366a910cb2d57513ab7639a3718"
-  integrity sha512-czg2r7unN1o1jcU6B2aT8I7r0nu8qxJeb7g5cwcm1q+W079712/8c5EGmR21sD7gCAW9MUDylLc01GZmFAQv4Q==
+hexo-component-inferno@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npmmirror.com/hexo-component-inferno/-/hexo-component-inferno-2.0.2.tgz#f8c1018612cc270176b46fc3bc8627936f33c067"
+  integrity sha512-MNhOBt6FrDuT5/78pi4NW3SDKKR/+SXK5qd4S3+T+uVzBCG6hEUa0dbUIBT07bgaz4e+j2f0PIxWC8yWKBoE5A==
   dependencies:
     ajv "^8.8.2"
     hexo "^6.0.0"
@@ -2033,15 +2033,15 @@ hexo-tag-plantuml@^1.0.0:
   resolved "https://registry.npmmirror.com/hexo-tag-plantuml/-/hexo-tag-plantuml-1.0.0.tgz#62bd18de614f9620e22a0c7286eb9a708deda7c8"
   integrity sha512-APpZNjDYTGqhySKCQDm2L/R2OSv7LYRzA5mq0MKaVghE+kr2te/v+UbJznKULvrD13+V4+gPM89V9FeWQ1eHTQ==
 
-hexo-theme-icarus@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.npmmirror.com/hexo-theme-icarus/-/hexo-theme-icarus-5.1.0.tgz#71cc55c9b37e2802dab26c5019f0e171516dc627"
-  integrity sha512-L//ebKg+lIMDYhZ4P+rYxZpu6eTrhSBjYajAknqIchuBsxF2CpTROFdTSNgQk7H4L6Gw8b+ffNztEV0Kcuff2A==
+hexo-theme-icarus@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.npmmirror.com/hexo-theme-icarus/-/hexo-theme-icarus-5.2.1.tgz#f5ffb18b57a409ab24d16ea31bbec574d7e78ab2"
+  integrity sha512-B8YnfKGAUwKCOdZgh7jsU1iNwW5wYTQ+ZwXbPpEwo3cqQ936hL5CDiGJ2ZKCuhVY1JixeNSObPQqV4v5H4VVpQ==
   dependencies:
     bulma-stylus "0.8.0"
     deepmerge "^4.2.2"
     hexo "^6.0.0"
-    hexo-component-inferno "^2.0.0"
+    hexo-component-inferno "^2.0.2"
     hexo-log "^3.0.0"
     hexo-pagination "^2.0.0"
     hexo-renderer-inferno "^0.1.3"

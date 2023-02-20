@@ -32,7 +32,7 @@ post_asset_folder: true
 relative_link: false
 future: true
 highlight:
-  enable: false
+  enable: true
   line_number: true
   auto_detect: true
   tab_replace: ''
@@ -59,7 +59,7 @@ pagination_dir: page
 include: null
 exclude: null
 ignore: null
-theme: hexo-theme-Claudia
+theme: icarus
 deploy:
   type: git
   repo: https://github.com/almightyYantao/almightyYantao.github.io.git

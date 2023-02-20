@@ -10,7 +10,7 @@ index_img: "/img/openvpn.webp"
 yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm
 yum -y install openvpn-as
 ```
-
+<!-- more -->
 ## 管理员登录
 
 首先需要修改管理员密码

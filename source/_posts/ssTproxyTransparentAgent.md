@@ -8,7 +8,7 @@ tags: ['代理','透明代理','vpn','流量转发']
 # 一、介绍
 ## 1、什么是透明代理
 在正向代理中，一个软件如果想走 client 的代理服务，我们必须显式配置该软件，对该软件来说，有没有走代理是很明确的，大家都“心知肚明”。而透明代理则与正向代理相反，当我们设置好合适的防火墙规则（仅以 Linux 的 iptables 为例），我们将不再需要显式配置这些软件来让其经过代理或者不经过代理（直连），因为这些软件发出的流量会自动被 iptables 规则所处理，那些我们认为需要代理的流量，会被通过合适的方法发送到 client 进程，而那些我们不需要代理的流量，则直接放行（直连）。这个过程对于我们使用的软件来说是完全透明的，软件自身对其一无所知。这就叫做 **透明代理**。注意，所谓透明是对我们使用的软件透明，而非对 client、server 或目标网站透明，理解这一点非常重要。
-
+<!-- more -->
 ## 2、透明代理的工作原理
 在正向代理中，期望使用代理的软件会通过 http、socks5 协议与 client 进程进行交互，以此完成代理操作。而在透明代理中，我们的软件发出的流量是完全正常的流量，并没有像正向代理那样，使用 http、socks5 等专用协议，这些流量经过 iptables 规则的处理后，会被通过“合适的方法”发送给 client 进程（当然是指那些我们认为需要走代理的流量）。注意，此时 client 进程接收到不再是 http、socks5 协议数据，而是经过 iptables 处理的“透明代理数据”，“透明代理数据”从本质上来说与正常数据没有区别，只是多了一些“元数据”在里面，使得 client 进程可以通过 netfilter 或操作系统提供的 API 接口来获取这些元数据（元数据其实就是原始目的地址和原始目的端口）。那么这个“合适的方法”是什么？目前来说有两种：
 
@@ -48,28 +48,26 @@ cp -af ss-tproxy.service /etc/systemd/system # 可选，安装 service 文件
 ```
 
 配置文件：
-```bash
-**/etc/ss-tproxy/ss-tproxy.conf**
-
-## mode
+{% codeblock "/etc/ss-tproxy/ss-tproxy.conf" lang:shell >folded %}
+# mode
 #mode='global'  # global 模式 (不分流)
 mode='gfwlist' # gfwlist 模式 (黑名单)
 #mode='chnroute' # chnroute 模式 (白名单)
  
-## ipv4/6
+# ipv4/6
 ipv4='true'     # true:启用ipv4透明代理; false:关闭ipv4透明代理
 ipv6='false'    # true:启用ipv6透明代理; false:关闭ipv6透明代理
  
-## tproxy
+# tproxy
 tproxy='false'  # true:TPROXY+TPROXY; false:REDIRECT+TPROXY
  
-## tcponly
+# tcponly
 tcponly='false' # true:仅代理TCP流量; false:代理TCP和UDP流量
  
-## selfonly
+# selfonly
 selfonly='false' # true:仅代理本机流量; false:代理本机及"内网"流量
  
-## proxy
+# proxy
 # user/group(#1,推荐) vs svraddr+port(#2), user/group选其中一个填写(不建议都填)
 proxy_procuser='proxy'   # 本机代理进程的 user/uid，用来放行本机代理进程传出的流量
 proxy_procgroup=''       # 本机代理进程的 group/gid，用来放行本机代理进程传出的流量
@@ -81,13 +79,13 @@ proxy_udpport='12121'    # ss/ssr/v2ray 等本机进程的 UDP 监听端口，�
 proxy_startcmd='(ss-redir -c /etc/shadowsocks-libev/config.json -u </dev/null &>>/var/log/ss-redir.log &)'     # 用于启动本机代理进程的 shell 命令，该命令应该能立即执行完毕
 proxy_stopcmd='kill -9 $(pidof ss-redir)'      # 用于关闭本机代理进程的 shell 命令，该命令应该能立即执行完毕
  
-## dns
+# dns
 dns_direct='223.5.5.5'                # 本地 IPv4 DNS，不能指定端口，也可以填组织、公司内部 DNS
 dns_direct6='240C::6666'              # 本地 IPv6 DNS，不能指定端口，也可以填组织、公司内部 DNS
 dns_remote='8.8.8.8#53'               # 远程 IPv4 DNS，必须指定端口，提示：访问远程 DNS 会走代理
 dns_remote6='2001:4860:4860::8888#53' # 远程 IPv6 DNS，必须指定端口，提示：访问远程 DNS 会走代理
  
-## dnsmasq
+# dnsmasq
 dnsmasq_bind_port='53'                  # dnsmasq 服务器监听端口，见 README
 dnsmasq_cache_size='4096'               # DNS 缓存大小，大小为 0 表示禁用缓存
 dnsmasq_cache_time='3600'               # DNS 缓存时间，单位是秒，最大 3600 秒
@@ -98,7 +96,7 @@ dnsmasq_conf_dir=()                     # `--conf-dir` 选项的参数，可以�
 dnsmasq_conf_file=()                    # `--conf-file` 选项的参数，可以填多个，空格隔开
 dnsmasq_conf_string=()                  # 自定义配置，一个数组元素就是一行配置，空格隔开
  
-## chinadns
+# chinadns
 chinadns_bind_port='65353'               # chinadns-ng 服务器监听端口，通常不用改动
 chinadns_timeout='5'                     # 等待上游 DNS 返回响应的超时时间，单位为秒
 chinadns_repeat='1'                      # 向可信 DNS 发送几次 DNS 查询请求，默认为 1
@@ -110,7 +108,7 @@ chinadns_logfile='/var/log/chinadns.log' # 日志文件，如果不想保存日�
 chinadns_privaddr4=()                    # IPv4 私有地址段，多个用空格隔开，具体见 README
 chinadns_privaddr6=()                    # IPv6 私有地址段，多个用空格隔开，具体见 README
  
-## dns2tcp
+# dns2tcp
 dns2tcp_bind_port='65454'               # dns2tcp 转发服务器监听端口，如有冲突请修改
 dns2tcp_tcp_syncnt=''                   # dns2tcp 的 `-s` 选项，留空表示不设置此选项
 dns2tcp_tcp_quickack='false'            # dns2tcp 的 `-a` 选项，选项取值为true/false
@@ -118,7 +116,7 @@ dns2tcp_tcp_fastopen='false'            # dns2tcp 的 `-f` 选项，选项取值
 dns2tcp_verbose='false'                 # 记录详细日志，除非进行调试，否则不建议启用
 dns2tcp_logfile='/var/log/dns2tcp.log'  # 日志文件，如果不想保存日志可以改为 /dev/null
  
-## ipts
+# ipts
 ipts_if_lo='lo'                 # 环回接口的名称，在标准发行版中，通常为 lo，如果不是请修改
 ipts_rt_tab='233'               # iproute2 路由表名或表 ID，除非产生冲突，否则不建议改动该选项
 ipts_rt_mark='0x2333'           # iproute2 策略路由的防火墙标记，除非产生冲突，否则不建议改动该选项
@@ -127,14 +125,14 @@ ipts_set_snat6='false'          # 设置 ip6tables 的 MASQUERADE 规则，布�
 ipts_reddns_onstop='true'       # ss-tproxy stop 后，是否将其它主机发至本机的 DNS 重定向至直连 DNS，详见 README
 ipts_proxy_dst_port='1:65535'   # 黑名单 IP 的哪些端口走代理，多个用逗号隔开，冒号为端口范围(含边界)，详见 README
  
-## opts
+# opts
 opts_ss_netstat='auto'                  # auto/ss/netstat，用哪个端口检测工具，见 README
 opts_ping_cmd_to_use='auto'             # auto/standalone/parameter，ping 相关，见 README
 opts_hostname_resolver='auto'           # auto/dig/getent/ping，用哪个解析工具，见 README
 opts_overwrite_resolv='false'           # true/false/留空，如何操作 resolv.conf，见 README
 opts_ip_for_check_net='223.5.5.5'       # 检测外网是否可访问的 IP，ping，留空表示跳过此检查
  
-## file
+# file
 file_gfwlist_txt='/etc/ss-tproxy/gfwlist.txt'      # gfwlist/chnlist 模式预置文件
 file_gfwlist_ext='/etc/ss-tproxy/gfwlist.ext'      # gfwlist/chnlist 模式扩展文件
 file_ignlist_ext='/etc/ss-tproxy/ignlist.ext'      # global/chnroute 模式扩展文件
@@ -142,7 +140,7 @@ file_chnroute_set='/etc/ss-tproxy/chnroute.set'    # chnroute 地址段文件 (i
 file_chnroute6_set='/etc/ss-tproxy/chnroute6.set'  # chnroute6 地址段文件 (ip6tables)
 file_dnsserver_pid='/etc/ss-tproxy/.dnsserver.pid' # dns 服务器进程的 pid 文件 (shell)
  
-## 主要放通下内网的访问，然后把MASQUERADE提前出来，要不然tcp的连接会回不来
+# 主要放通下内网的访问，然后把MASQUERADE提前出来，要不然tcp的连接会回不来
 post_start(){
 iptables -t nat -I PREROUTING -s 10.207.0.0/16 -d 10.0.0.0/8 -j ACCEPT
 iptables -t nat -I SSTP_POSTROUTING -s 10.207.0.0/16 -j MASQUERADE
@@ -152,7 +150,7 @@ post_stop(){
 iptables -t nat -D PREROUTING -s 10.207.0.0/16 -d 10.0.0.0/8 -j ACCEPT
 iptables -t nat -D SSTP_POSTROUTING -s 10.207.0.0/16 -j MASQUERADE
 }
-```
+{% endcodeblock %}
 
 以下配置需要特别注意，如果不知道如何配置的，那么就按照我这么默认配置即可
 具体配置介绍：[https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E](https://github.com/zfl9/ss-tproxy#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)

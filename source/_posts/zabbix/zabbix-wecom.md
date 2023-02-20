@@ -5,7 +5,7 @@ index_img: "/img/zabbix.webp"
 ---
 
 ## 新增Python脚本
-
+<!-- more -->
 ```python
 # encoding: utf-8
 import sys

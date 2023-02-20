@@ -7,7 +7,7 @@ index_img: "/img/openvpn.webp"
 ## 方案介绍
 ### 时序图
 ![openvpn-auth 时序图](./openvpn-auth/image2022-12-12_20-11-38.png)
-
+<!-- more -->
 ## 其中有两个地方需要修改
 - `corpid`: 企业微信的企业ID
 - `corpsecret`: 拥有通讯录的企业微信的Secret
