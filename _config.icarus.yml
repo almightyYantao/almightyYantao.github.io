@@ -1,11 +1,11 @@
 version: 5.1.0
 variant: default
-logo: /img/logo.svg
+logo: https://raw.githubusercontent.com/almightyYantao/blog-img/master/logo.png
 head:
-    favicon: /img/favicon.svg
+    favicon: https://raw.githubusercontent.com/almightyYantao/blog-img/master/icon.png
     manifest:
-        name: 
-        short_name: 
+        name: Almighty.YanTao 线上笔记本 
+        short_name: Yantao
         start_url: 
         theme_color: 
         background_color: 
