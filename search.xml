@@ -110,7 +110,7 @@
       <link href="/2022/12/14/openvpn/openvpn-dynamic-route-permissions/"/>
       <url>/2022/12/14/openvpn/openvpn-dynamic-route-permissions/</url>
       
-        <content type="html"><![CDATA[<h2 id="首先了解我们为什么要动态下发"><a href="#首先了解我们为什么要动态下发" class="headerlink" title="首先了解我们为什么要动态下发"></a>首先了解我们为什么要动态下发</h2><ul><li>开源的openvpn并不支持权限管理，大部分在做权限管理的时候使用的都是根据来源IP或IP段通过iptables&#x2F;交换机来进行权限控制</li><li>权限控制太广了，根本无法很好的去做管理后台的配置，特别是需要用户组来进行区分的时候，那就更困难了</li></ul><h2 id="权限下发的逻辑"><a href="#权限下发的逻辑" class="headerlink" title="权限下发的逻辑"></a>权限下发的逻辑</h2><img  src=http://www.plantuml.com/plantuml/svg/Kr3WAiaioKbLo2z8pIiho7knVzwplgNFb-nwrjB_TFO-hkTJLZphsAwWQmTJOFMoOTQB_UrFMzSytpiHeXegmmMbTUrWIf_iw7xQFz4puEcS3K_dDhpVq_DYtRxdUzSzxLhnhA7nsTpcbpCd83H1RB9wkgxdMSS4YC40><h2 id="用到的技术"><a href="#用到的技术" class="headerlink" title="用到的技术"></a>用到的技术</h2><ul><li>ipset</li><li>iptables</li></ul><h2 id="主要脚本内容"><a href="#主要脚本内容" class="headerlink" title="主要脚本内容"></a>主要脚本内容</h2><h3 id="连接脚本"><a href="#连接脚本" class="headerlink" title="连接脚本"></a>连接脚本</h3><p>&#96;&#96;&#96;bash<br>&#x2F;sbin&#x2F;ipset create ${common_name}-${common_ip} hash:ip<br>&#x2F;sbin&#x2F;ipset create ${common_name}-${common_ip}-drop hash:ip</p><h1 id="这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现"><a href="#这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现" class="headerlink" title="这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现"></a>这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现</h1><p>for ((i &#x3D; 0; i &lt; $</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="首先了解我们为什么要动态下发"><a href="#首先了解我们为什么要动态下发" class="headerlink" title="首先了解我们为什么要动态下发"></a>首先了解我们为什么要动态下发</h2><ul><li>开源的openvpn并不支持权限管理，大部分在做权限管理的时候使用的都是根据来源IP或IP段通过iptables&#x2F;交换机来进行权限控制</li><li>权限控制太广了，根本无法很好的去做管理后台的配置，特别是需要用户组来进行区分的时候，那就更困难了</li></ul><h2 id="权限下发的逻辑"><a href="#权限下发的逻辑" class="headerlink" title="权限下发的逻辑"></a>权限下发的逻辑</h2><img  src=http://www.plantuml.com/plantuml/svg/Kr3WAiaioKbLo2z8pIiho7knVzwplgNFb-nwrjB_TFO-hkTJLZphsAwWQmTJOFMoOTQB_UrFMzSytpiHeXegmmMbTUrWIf_iw7xQFz4puEcS3K_dDhpVq_DYtRxdUzSzxLhnhA7nsTpcbpCd83H1RB9wkgxdMSS4YC40><h2 id="用到的技术"><a href="#用到的技术" class="headerlink" title="用到的技术"></a>用到的技术</h2><ul><li>ipset</li><li>iptables</li></ul><h2 id="主要脚本内容"><a href="#主要脚本内容" class="headerlink" title="主要脚本内容"></a>主要脚本内容</h2><h3 id="连接脚本"><a href="#连接脚本" class="headerlink" title="连接脚本"></a>连接脚本</h3><pre><code class="bash">/sbin/ipset create $&#123;common_name&#125;-$&#123;common_ip&#125; hash:ip/sbin/ipset create $&#123;common_name&#125;-$&#123;common_ip&#125;-drop hash:ip# 这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现for index in `seq 0 $permissionsAcceptLength`; do    /sbin/ipset add $&#123;common_name&#125;-$&#123;common_ip&#125; $&#123;permissionsAccept[$index]//\&quot;/&#125;donefor index in `seq 0 $permissionsDropLength`; do    /sbin/ipset add $&#123;common_name&#125;-$&#123;common_ip&#125;-drop $&#123;permissionsDrop[$index]//\&quot;/&#125;done# 设置iptables/sbin/iptables -A FORWARD -s $common_ip -m set --match-set $&#123;common_name&#125;-$&#123;common_ip&#125; dst -j ACCEPT/sbin/iptables -A FORWARD -s $common_ip -m set --match-set $&#123;common_name&#125;-$&#123;common_ip&#125;-drop dst -j DROP/sbin/iptables -A FORWARD -s $common_ip -j DROP</code></pre><h3 id="断开脚本"><a href="#断开脚本" class="headerlink" title="断开脚本"></a>断开脚本</h3><pre><code class="bash">/sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125; dst -j ACCEPT/sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;-drop dst -j DROP/sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -j DROP/sbin/ipset destroy $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;/sbin/ipset destroy $&#123;common_name&#125;-$&#123;ifconfig_pool_remote_ip&#125;-drop</code></pre><h2 id="如果在运行的过程中出现脚本权限不足"><a href="#如果在运行的过程中出现脚本权限不足" class="headerlink" title="如果在运行的过程中出现脚本权限不足"></a>如果在运行的过程中出现脚本权限不足</h2><pre><code class="bash">chmod 766 connect.sh disconnect.shchmod a+x connect.sh disconnect.shchmod +s connect.sh disconnect.sh</code></pre>]]></content>
       
       
       
@@ -162,9 +162,9 @@
       
         <tags>
             
-            <tag> openvpn </tag>
-            
             <tag> 2.9.0 </tag>
+            
+            <tag> openvpn </tag>
             
             <tag> openvpn access server </tag>
             
@@ -200,13 +200,13 @@
       
         <tags>
             
-            <tag> 企业微信 </tag>
-            
             <tag> openvpn </tag>
             
             <tag> openvpn-auth </tag>
             
             <tag> wecom </tag>
+            
+            <tag> 企业微信 </tag>
             
             <tag> 认证 </tag>
             
