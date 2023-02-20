@@ -29,12 +29,12 @@ openvpn->用户:完成连接
 /sbin/ipset create ${common_name}-${common_ip} hash:ip
 /sbin/ipset create ${common_name}-${common_ip}-drop hash:ip
 # 这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现
-for ((i = 0; i < ${#permissionsAccept[@]}; i++)); do
-    /sbin/ipset add ${common_name}-${common_ip} ${permissionsAccept[$i]//\"/}
+for index in `seq 0 $permissionsAcceptLength`; do
+    /sbin/ipset add ${common_name}-${common_ip} ${permissionsAccept[$index]//\"/}
 done
 
-for ((i = 0; i < ${#permissionsDrop[@]}; i++)); do
-    /sbin/ipset add ${common_name}-${common_ip}-drop ${permissionsDrop[$i]//\"/}
+for index in `seq 0 $permissionsDropLength`; do
+    /sbin/ipset add ${common_name}-${common_ip}-drop ${permissionsDrop[$index]//\"/}
 done
 # 设置iptables
 /sbin/iptables -A FORWARD -s $common_ip -m set --match-set ${common_name}-${common_ip} dst -j ACCEPT
