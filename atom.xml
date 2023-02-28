@@ -6,7 +6,7 @@
   <link href="https://almightyyantao.github.io/atom.xml" rel="self"/>
   
   <link href="https://almightyyantao.github.io/"/>
-  <updated>2023-02-28T11:27:50.543Z</updated>
+  <updated>2023-02-28T11:30:53.472Z</updated>
   <id>https://almightyyantao.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://almightyyantao.github.io/2023/02/28/OpenWrt%E5%A4%9A%E6%8B%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
     <id>https://almightyyantao.github.io/2023/02/28/OpenWrt%E5%A4%9A%E6%8B%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</id>
     <published>2023-02-27T16:00:00.000Z</published>
-    <updated>2023-02-28T11:27:50.543Z</updated>
+    <updated>2023-02-28T11:30:53.472Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="多拨类"><a href="#多拨类" class="headerlink" title="多拨类"></a>多拨类</h1><p>多拨相关的插件主要是 <strong>多线多拨</strong> 和 <strong>负载均衡</strong> 插件。</p><span id="more"></span><h2 id="Syncdial-多线多拨"><a href="#Syncdial-多线多拨" class="headerlink" title="Syncdial 多线多拨"></a>Syncdial <strong>多线多拨</strong></h2><p>使用macvlan驱动创建多个虚拟WAN口，支持并发多拨</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci-app-syncdial</span><br></pre></td></tr></table></figure><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202302281925038.png"/>## MWAN3负载均衡支持多根网线或者多个PPPOE账号的同时拨号使用和负载均衡。并且还可以通过Ping方式来检测中断线路并自动屏蔽中断线路<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci-i18n-mwan3-zh-cn</span><br></pre></td></tr></table></figure><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202302281926379.png"/># 其他如发现无法安装或更新，请执行以下操作## 更新OPKG软件列表<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="多拨类"><a href="#多拨类" class="headerlink" title="多拨类"></a>多拨类</h1><p>多拨相关的插件主要是 <strong>多线多拨</strong> 和 <strong>负载均衡</strong> 插件。</p><span id="more"></span><h2 id="Syncdial-多线多拨"><a href="#Syncdial-多线多拨" class="headerlink" title="Syncdial 多线多拨"></a>Syncdial <strong>多线多拨</strong></h2><p>使用macvlan驱动创建多个虚拟WAN口，支持并发多拨</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci-app-syncdial</span><br></pre></td></tr></table></figure><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202302281925038.png"/><h2 id="MWAN3负载均衡"><a href="#MWAN3负载均衡" class="headerlink" title="MWAN3负载均衡"></a>MWAN3负载均衡</h2><p>支持多根网线或者多个PPPOE账号的同时拨号使用和负载均衡。并且还可以通过Ping方式来检测中断线路并自动屏蔽中断线路</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci-i18n-mwan3-zh-cn</span><br></pre></td></tr></table></figure><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202302281926379.png"/><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>如发现无法安装或更新，请执行以下操作</p><h2 id="更新OPKG软件列表"><a href="#更新OPKG软件列表" class="headerlink" title="更新OPKG软件列表"></a>更新OPKG软件列表</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br></pre></td></tr></table></figure>]]></content>
     
     
     <summary type="html">&lt;h1 id=&quot;多拨类&quot;&gt;&lt;a href=&quot;#多拨类&quot; class=&quot;headerlink&quot; title=&quot;多拨类&quot;&gt;&lt;/a&gt;多拨类&lt;/h1&gt;&lt;p&gt;多拨相关的插件主要是 &lt;strong&gt;多线多拨&lt;/strong&gt; 和 &lt;strong&gt;负载均衡&lt;/strong&gt; 插件。&lt;/p&gt;</summary>
@@ -81,13 +81,13 @@
     
     
     
-    <category term="curl" scheme="https://almightyyantao.github.io/tags/curl/"/>
-    
     <category term="代理" scheme="https://almightyyantao.github.io/tags/%E4%BB%A3%E7%90%86/"/>
     
-    <category term="检测" scheme="https://almightyyantao.github.io/tags/%E6%A3%80%E6%B5%8B/"/>
-    
     <category term="zabbix" scheme="https://almightyyantao.github.io/tags/zabbix/"/>
+    
+    <category term="curl" scheme="https://almightyyantao.github.io/tags/curl/"/>
+    
+    <category term="检测" scheme="https://almightyyantao.github.io/tags/%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
@@ -211,9 +211,9 @@
     
     
     
-    <category term="zabbix" scheme="https://almightyyantao.github.io/tags/zabbix/"/>
-    
     <category term="企业微信" scheme="https://almightyyantao.github.io/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/"/>
+    
+    <category term="zabbix" scheme="https://almightyyantao.github.io/tags/zabbix/"/>
     
     <category term="报警" scheme="https://almightyyantao.github.io/tags/%E6%8A%A5%E8%AD%A6/"/>
     
@@ -234,9 +234,9 @@
     
     
     
-    <category term="openvpn" scheme="https://almightyyantao.github.io/tags/openvpn/"/>
-    
     <category term="2.9.0" scheme="https://almightyyantao.github.io/tags/2-9-0/"/>
+    
+    <category term="openvpn" scheme="https://almightyyantao.github.io/tags/openvpn/"/>
     
     <category term="openvpn access server" scheme="https://almightyyantao.github.io/tags/openvpn-access-server/"/>
     
