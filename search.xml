@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>OpenWrt多拨使用教程</title>
+      <link href="/2023/02/28/OpenWrt%E5%A4%9A%E6%8B%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
+      <url>/2023/02/28/OpenWrt%E5%A4%9A%E6%8B%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="多拨类"><a href="#多拨类" class="headerlink" title="多拨类"></a>多拨类</h1><p>多拨相关的插件主要是 <strong>多线多拨</strong> 和 <strong>负载均衡</strong> 插件。</p><span id="more"></span><h2 id="Syncdial-多线多拨"><a href="#Syncdial-多线多拨" class="headerlink" title="Syncdial 多线多拨"></a>Syncdial <strong>多线多拨</strong></h2><p>使用macvlan驱动创建多个虚拟WAN口，支持并发多拨</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci-app-syncdial</span><br></pre></td></tr></table></figure><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202302281925038.png"/>## MWAN3负载均衡支持多根网线或者多个PPPOE账号的同时拨号使用和负载均衡。并且还可以通过Ping方式来检测中断线路并自动屏蔽中断线路<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci-i18n-mwan3-zh-cn</span><br></pre></td></tr></table></figure><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202302281926379.png"/># 其他如发现无法安装或更新，请执行以下操作## 更新OPKG软件列表<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> openwrt </tag>
+            
+            <tag> 多拨 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python ChatGPT Telegram Bot</title>
       <link href="/2023/02/21/Python%20ChatGPT%20Telegram%20Bot/"/>
       <url>/2023/02/21/Python%20ChatGPT%20Telegram%20Bot/</url>
