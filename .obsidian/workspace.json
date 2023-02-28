@@ -32,6 +32,18 @@
             }
           },
           {
+            "id": "e6e8f94530556198",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "source/_posts/OpenWrt多拨使用教程.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "4fd7e97eb42ada0f",
             "type": "leaf",
             "state": {
@@ -44,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -110,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "source/_posts/Python ChatGPT Telegram Bot.md",
+                "file": "source/_posts/OpenWrt多拨使用教程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "source/_posts/Python ChatGPT Telegram Bot.md",
+                "file": "source/_posts/OpenWrt多拨使用教程.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "source/_posts/Python ChatGPT Telegram Bot.md"
+                "file": "source/_posts/OpenWrt多拨使用教程.md"
               }
             }
           },
@@ -171,22 +183,23 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "canvas:新建白板": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
-      "canvas:Create new canvas": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false
     }
   },
-  "active": "aea8d9d9b3e454e6",
+  "active": "e6e8f94530556198",
   "lastOpenFiles": [
-    "source/_posts/ssTproxyTransparentAgent.md",
+    "source/_posts/记录一次办公网Panabit全球化的改造计划.md",
+    "source/_posts/OpenWrt多拨使用教程.md",
     "source/_posts/Python ChatGPT Telegram Bot.md",
+    "source/_posts/ssTproxyTransparentAgent.md",
     "source/_posts/openvpn/openvpn-access-server.md",
     "source/_posts/openvpn/clearOpenvpnInvalidIp.md",
     "未命名.canvas",
-    "source/_posts/记录一次办公网Panabit全球化的改造计划.md",
     "source/_posts/haproxy-load.md",
     "source/_posts/curl 检测代理的可用性以及延迟.md",
     "source/_posts/zabbix/zabbix-wecom.md",
