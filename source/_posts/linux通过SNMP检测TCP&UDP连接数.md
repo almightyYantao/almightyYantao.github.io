@@ -3,6 +3,7 @@ title: linux通过SNMP检测TCP&UDP连接数
 date: 2023-03-11  
 tags: ['zabbix','tcp','udp']  
 cover: https://raw.githubusercontent.com/almightyYantao/blog-img/master/202303112218722.png
+toc: true
 ---
 # 先上图&介绍
 
@@ -10,7 +11,7 @@ cover: https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230311
 之前都是通过zabbix来进行建设看板，但是用了一段时间后总是缺点感觉；后面通过大佬的介绍，试用了`Grafana`，这不试用还好，一试用，效果的展现让我无法自拔，这就是我想要的监控看板啊！能根据数值的不同进行颜色的区分，在大屏上一眼就可以看出当前哪一块网络出现了问题！
 
 美中不足的是，上面的两列不能设置报警，报警貌似必须是图表形式的才可以；不过可以建立一个通用的报警看板，问题不大～
-
+<!-- more -->
 其他的一些监控项都是最简单基础的，我这边就不过多的赘述，大家可以自行上网搜索，或者之前引用之前`zabbix`的数据，主要讲解下`TCP连接数`和`UDP连接数`的获取
 
 别的不说，这图还是很好看的；
