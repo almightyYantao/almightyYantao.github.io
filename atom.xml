@@ -6,7 +6,7 @@
   <link href="https://almightyyantao.github.io/atom.xml" rel="self"/>
   
   <link href="https://almightyyantao.github.io/"/>
-  <updated>2023-03-11T14:29:45.550Z</updated>
+  <updated>2023-03-11T14:31:35.370Z</updated>
   <id>https://almightyyantao.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://almightyyantao.github.io/2023/03/11/linux%E9%80%9A%E8%BF%87SNMP%E6%A3%80%E6%B5%8BTCP&amp;UDP%E8%BF%9E%E6%8E%A5%E6%95%B0/"/>
     <id>https://almightyyantao.github.io/2023/03/11/linux%E9%80%9A%E8%BF%87SNMP%E6%A3%80%E6%B5%8BTCP&amp;UDP%E8%BF%9E%E6%8E%A5%E6%95%B0/</id>
     <published>2023-03-10T16:00:00.000Z</published>
-    <updated>2023-03-11T14:29:45.550Z</updated>
+    <updated>2023-03-11T14:31:35.370Z</updated>
     
     <content type="html"><![CDATA[<h1 id="先上图-amp-介绍"><a href="#先上图-amp-介绍" class="headerlink" title="先上图&amp;介绍"></a>先上图&amp;介绍</h1><p>记录一次全球化网络监控的看板建设；<br>之前都是通过zabbix来进行建设看板，但是用了一段时间后总是缺点感觉；后面通过大佬的介绍，试用了<code>Grafana</code>，这不试用还好，一试用，效果的展现让我无法自拔，这就是我想要的监控看板啊！能根据数值的不同进行颜色的区分，在大屏上一眼就可以看出当前哪一块网络出现了问题！</p><p>美中不足的是，上面的两列不能设置报警，报警貌似必须是图表形式的才可以；不过可以建立一个通用的报警看板，问题不大～</p><p>其他的一些监控项都是最简单基础的，我这边就不过多的赘述，大家可以自行上网搜索，或者之前引用之前<code>zabbix</code>的数据，主要讲解下<code>TCP连接数</code>和<code>UDP连接数</code>的获取</p><p>别的不说，这图还是很好看的；<br><img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202303112218722.png"/></p><h1 id="现在讲讲获取TCP-x2F-UDP连接数的准备"><a href="#现在讲讲获取TCP-x2F-UDP连接数的准备" class="headerlink" title="现在讲讲获取TCP&#x2F;UDP连接数的准备"></a>现在讲讲获取TCP&#x2F;UDP连接数的准备</h1><ul><li>SNMP (yum install snmpd)</li><li>自定义OID</li></ul><h1 id="创建获取连接数脚本"><a href="#创建获取连接数脚本" class="headerlink" title="创建获取连接数脚本"></a>创建获取连接数脚本</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">integer</span></span><br><span class="line"><span class="built_in">echo</span> $(netstat -an|awk <span class="string">&#x27;/^tcp/ &#123;++s[$NF]&#125; END &#123;for(a in s ) print a,s[a]&#125;&#x27;</span> | grep ESTABLISHED | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure><p>这个是获取<code>TCP</code>连接数的脚本，如果要获取UDP的，请把<code>tcp</code>改成<code>udp</code><br>设置脚本权限</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 766 zabbix.tcp.sh</span><br></pre></td></tr></table></figure><h1 id="修改SNMP配置文件"><a href="#修改SNMP配置文件" class="headerlink" title="修改SNMP配置文件"></a>修改SNMP配置文件</h1><p>文件路径：<code>/etc/snmp/snmpd.conf</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pass .1.3.6.1.4.1.2021.21 /etc/snmp/shell/zabbix.tcp.sh</span><br></pre></td></tr></table></figure><blockquote><p>在最底下加入这条命令，后面的<code>shell</code>脚本就是上传创建的脚本路径</p></blockquote><h1 id="重启SNMP服务"><a href="#重启SNMP服务" class="headerlink" title="重启SNMP服务"></a>重启SNMP服务</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service snmpd restart</span><br></pre></td></tr></table></figure><h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>通过这种方式，我们就可以做更多的扩展，比如</p><ul><li>获取连接人数</li><li>当前访问情况</li><li>…</li></ul>]]></content>
     
@@ -126,13 +126,13 @@
     
     
     
-    <category term="zabbix" scheme="https://almightyyantao.github.io/tags/zabbix/"/>
-    
     <category term="curl" scheme="https://almightyyantao.github.io/tags/curl/"/>
     
     <category term="代理" scheme="https://almightyyantao.github.io/tags/%E4%BB%A3%E7%90%86/"/>
     
     <category term="检测" scheme="https://almightyyantao.github.io/tags/%E6%A3%80%E6%B5%8B/"/>
+    
+    <category term="zabbix" scheme="https://almightyyantao.github.io/tags/zabbix/"/>
     
   </entry>
   
@@ -279,9 +279,9 @@
     
     
     
-    <category term="2.9.0" scheme="https://almightyyantao.github.io/tags/2-9-0/"/>
-    
     <category term="openvpn" scheme="https://almightyyantao.github.io/tags/openvpn/"/>
+    
+    <category term="2.9.0" scheme="https://almightyyantao.github.io/tags/2-9-0/"/>
     
     <category term="openvpn access server" scheme="https://almightyyantao.github.io/tags/openvpn-access-server/"/>
     

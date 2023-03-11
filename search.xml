@@ -102,13 +102,13 @@
       
         <tags>
             
-            <tag> zabbix </tag>
-            
             <tag> curl </tag>
             
             <tag> 代理 </tag>
             
             <tag> 检测 </tag>
+            
+            <tag> zabbix </tag>
             
         </tags>
       
@@ -250,9 +250,9 @@
       
         <tags>
             
-            <tag> 2.9.0 </tag>
-            
             <tag> openvpn </tag>
+            
+            <tag> 2.9.0 </tag>
             
             <tag> openvpn access server </tag>
             
