@@ -2,6 +2,7 @@
 title: linux通过SNMP检测TCP&UDP连接数  
 date: 2023-03-11  
 tags: ['zabbix','tcp','udp']  
+cover: https://raw.githubusercontent.com/almightyYantao/blog-img/master/202303112218722.png
 ---
 # 先上图&介绍
 
